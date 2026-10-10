@@ -90,11 +90,20 @@ def test_retired_stylesheets_are_deleted(path: Path) -> None:
     )
 
 
+# Companion content that Qollab never loads lives outside the submission
+# surface: entangle-lab/ (standalone beginner page), docs/ (mdBook guide),
+# brag-output/ (promo video sources). They may carry their own stylesheets;
+# the contract below covers only what the Qollab runtime sees.
+NON_SUBMISSION_DIRS = frozenset({"entangle-lab", "docs", "brag-output"})
+
+
 def test_main_css_is_the_only_stylesheet_on_disk() -> None:
     shipped = sorted(
         p.relative_to(REPO_ROOT).as_posix()
         for p in REPO_ROOT.rglob("*.css")
-        if ".git" not in p.parts and "node_modules" not in p.parts
+        if ".git" not in p.parts
+        and "node_modules" not in p.parts
+        and not (NON_SUBMISSION_DIRS & set(p.parts))
     )
     assert shipped == ["main.css"]
 
