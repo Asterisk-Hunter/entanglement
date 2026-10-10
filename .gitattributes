@@ -1,0 +1,17 @@
+# Normalize line endings so the repo is identical across platforms.
+* text=auto eol=lf
+
+# Binary assets are never touched.
+*.png binary
+*.jpg binary
+*.gif binary
+*.ico binary
+*.woff binary
+*.woff2 binary
+
+# Keep Python and JS diffs clean and reviewable.
+*.py text diff=python
+*.js text diff=javascript
+*.json text
+*.css text
+*.html text
