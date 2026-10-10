@@ -1,0 +1,17 @@
+# Fully pinned test environment resolved and verified with Python 3.12.14.
+dill==0.4.1
+iniconfig==2.3.1
+numpy==2.2.6
+packaging==26.3
+pluggy==1.6.0
+psutil==7.2.2
+Pygments==2.21.0
+pytest==8.4.2
+python-dateutil==2.9.0.post0
+qiskit==2.2.3
+qiskit-aer==0.17.2
+rustworkx==0.18.1
+scipy==1.15.3
+six==1.17.0
+stevedore==5.9.1
+typing_extensions==4.16.0

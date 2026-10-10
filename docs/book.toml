@@ -1,7 +1,7 @@
 [book]
-title = "Entangle Lab Field Guide"
-authors = ["Entangle Lab contributors"]
-description = "A gentle, interactive guide to quantum entanglement and the CHSH Bell test."
+title = "Entanglement Trap: Field Guide"
+authors = ["Entanglement Trap contributors"]
+description = "A practical guide to the channel-discrimination laboratory, its evidence, and its extension interface."
 src = "src"
 language = "en"
 
