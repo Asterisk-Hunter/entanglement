@@ -1,0 +1,156 @@
+<a class="skip" href="#proof">Skip to the proof stage</a>
+<p id="announcer" class="visually-hidden" role="status" aria-live="polite"></p>
+
+<header>
+  <p class="label">ENTANGLEMENT TRAP</p>
+</header>
+
+<main>
+  <section id="surprise" aria-labelledby="surprise-label">
+    <h1 id="hero">
+      <span>TWO BLACK BOXES.</span>
+      <span>ONE USE.</span>
+      <span>PICK YOUR PROBE.</span>
+    </h1>
+
+    <h2 id="surprise-label" class="label">PLAY ONE ROUND</h2>
+
+    <form id="round-form" novalidate>
+      <fieldset>
+        <legend class="label">PROBE</legend>
+        <label class="probe" for="probe-sep">
+          <input type="radio" id="probe-sep" name="probe" value="SEPARABLE">
+          <span>SEPARABLE</span>
+        </label>
+        <label class="probe" for="probe-me">
+          <input type="radio" id="probe-me" name="probe" value="MAX_ENTANGLEMENT" checked>
+          <span>MAX ENTANGLEMENT</span>
+        </label>
+      </fieldset>
+
+      <div class="control-row" aria-label="Quantum run settings">
+        <div class="setting">
+          <label class="label" for="dimension">DIMENSION</label>
+          <select id="dimension">
+            <option value="16" selected>16 · DEFAULT</option>
+            <option value="64">64 · LARGER</option>
+            <option value="256">256 · FLAGSHIP</option>
+          </select>
+        </div>
+        <div class="setting">
+          <label class="label" for="trials">SHOTS / CHANNEL</label>
+          <select id="trials">
+            <option value="100" selected>100 · FAST</option>
+            <option value="500">500 · TIGHTER CI</option>
+            <option value="2000">2000 · HEAVY</option>
+          </select>
+        </div>
+      </div>
+
+      <button id="run" type="submit">PLAY ONE ROUND</button>
+    </form>
+
+    <p id="run-state" class="meta-mono">IDLE · NO QUANTUM JOB SENT</p>
+    <p id="round-outcome" class="readout">NO ROUND PLAYED YET.</p>
+    <p id="round-narrative" class="body"></p>
+  </section>
+
+  <section id="understanding" aria-labelledby="strategy-label">
+    <h2 id="strategy-label" class="label">TEST THIS STRATEGY</h2>
+    <p class="body">The same single quantum job also gathers independent one-query trials. Reveal them after your round; no second backend job is sent.</p>
+
+    <div class="control-row">
+      <button id="strategy" type="button" disabled>REVEAL STRATEGY TEST</button>
+      <button id="compare-separable" type="button" disabled>COMPARE SEPARABLE</button>
+    </div>
+
+    <pre id="benchmark-readout" class="readout mono" aria-label="Strategy benchmark readout" tabindex="0">RUN ONE ROUND FIRST.</pre>
+    <p id="impact" class="display-2" hidden></p>
+
+    <div id="mechanism" hidden>
+      <p class="label">WHAT ACTUALLY CHANGED?</p>
+      <p id="mechanism-summary" class="display-2"></p>
+      <dl class="ledger" aria-label="Why maximum entanglement performs poorly">
+        <dt>ENTANGLEMENT</dt>
+        <dd id="mechanism-entanglement">MAXIMAL</dd>
+        <dt>|OUTPUT OVERLAP|</dt>
+        <dd id="mechanism-overlap"></dd>
+        <dt>TRACE DISTANCE</dt>
+        <dd id="mechanism-trace"></dd>
+        <dt>EXECUTABLE WIN</dt>
+        <dd id="mechanism-success"></dd>
+      </dl>
+      <p class="body">The resource did not disappear. The two possible channel outputs became almost indistinguishable. Maximum entanglement stayed maximum; distinguishability collapsed.</p>
+    </div>
+  </section>
+
+  <section id="proof" aria-labelledby="proof-label">
+    <h2 id="proof-label" class="label">PROOF</h2>
+    <p id="provenance" class="meta-mono">SOURCE: NOT RUN | PROVENANCE: NOT RUN</p>
+    <p id="bridge-error" class="body" role="alert"></p>
+
+    <p class="body"><strong>Read overlap by magnitude.</strong> For the two possible outputs, |overlap| rises 0.50 → 0.875 → 0.969 → 0.992 as d grows. Entanglement remains maximal; distinguishability is what collapses. The signed overlap is retained in the technical figure because the phase is part of the exact state description.</p>
+
+    <p class="body">maximal entanglement is the trap; entanglement itself isn't</p>
+
+    <p class="body">For unitaries, separable inputs are known to match maximally entangled ones. What fails in this flagship pair is specific: the maximally entangled probe makes the two channel outputs harder to tell apart than a plain product probe does. That is a property of this channel pair, not of entanglement as a resource.</p>
+
+    <figure id="fingerprint-figure" class="figure">
+      <div id="fingerprint" class="figure-host"></div>
+      <figcaption class="label" id="figure-caption">OUTPUT-STATE DISTINGUISHABILITY, d = 4, 16, 64, 256</figcaption>
+    </figure>
+
+    <dl id="figure-values" class="ledger" aria-label="The figure's values in words"></dl>
+
+    <figure id="sweep-figure" class="figure">
+      <div id="sweep" class="figure-host"></div>
+      <figcaption class="label" id="sweep-caption">WIN PROBABILITY AGAINST DIMENSION, d = 2, 4, 16, 64, 256, 1024</figcaption>
+    </figure>
+
+    <p class="body">At d = 1024 the numbers are theory only: there is no live path that executes a register of that size. At d = 256 the executable value is about 0.508, and 4000 trials give a standard error near 0.008, so that gap from the chance line is smaller than two standard errors and cannot be resolved from chance at that trial count.</p>
+
+    <dl id="sweep-values" class="ledger" aria-label="The sweep's values in words"></dl>
+
+    <figure id="hull-figure" class="figure">
+      <div id="hull" class="figure-host"></div>
+      <figcaption class="label" id="hull-caption">EIGENVALUES OF W ON THE UNIT CIRCLE, d = 16</figcaption>
+    </figure>
+
+    <p class="body">The circle holds the spectrum of the channel-relating unitary. The convex hull is the set a separable probe can reach; the centroid is where the maximally entangled probe lands. The separable nearest point is attained by the flagship product-probe strategy.</p>
+
+    <dl id="hull-values" class="ledger" aria-label="The hull figure's values in words"></dl>
+
+    <figure id="heatmap-figure" class="figure">
+      <div id="heatmap" class="figure-host"></div>
+      <figcaption class="label" id="heatmap-caption">HELSTROM BOUND AGAINST ENTANGLEMENT ENTROPY</figcaption>
+    </figure>
+
+    <dl id="heatmap-values" class="ledger" aria-label="The heat map's values in words"></dl>
+
+    <p class="body">A note on sources: the flagship effect is credited to Lien &amp; Quintino (2026, preprint). The one-query discrimination bound used for the ceiling is D'Ariano, Lo Presti and Paris, J. Opt. B 4 S273 (2002). The generalized channel-discrimination formulas used for the other comparison pairs are Manna, Das Bhowmik and Saha, Phys. Rev. A 112, 042215 (2025).</p>
+
+    <dl id="ledger" class="ledger">
+      <dt>EMPIRICAL</dt>
+      <dd>Measured win rate over independent one-query trials in the selected Qollab backend run.</dd>
+      <dt>ANALYTIC</dt>
+      <dd>Closed-form value for the executable strategy.</dd>
+      <dt>THEORETICAL CEILING</dt>
+      <dd>Helstrom optimum for the probe. Computed from theory, not measured by the run.</dd>
+    </dl>
+
+    <button id="expert-toggle" type="button" aria-expanded="false" aria-controls="expert-drawer">SHOW EXPERT EVIDENCE</button>
+    <div id="expert-drawer" class="expert" tabindex="-1" hidden></div>
+  </section>
+
+  <section id="resource-lab" aria-labelledby="resource-lab-label">
+    <h2 id="resource-lab-label" class="label">RESOURCE LAB</h2>
+    <p class="body">Registered channel pairs render through one runtime schema. Values keep their ANALYTIC or THEORETICAL CEILING labels; gallery browsing never submits another quantum job.</p>
+    <p id="gallery-state" class="meta-mono">RESOURCE REGISTRY NOT LOADED</p>
+    <ul id="gallery-list" class="gallery-list"></ul>
+  </section>
+</main>
+
+<footer>
+  <p class="meta-mono">This effort is supported by Qollab &amp; IonQ</p>
+  <p class="meta-mono">The phenomenon is quantum. Small instances are classically simulable; no computational advantage is claimed. The underlying result is credited to Lien &amp; Quintino (2026, preprint). The one-query discrimination bound is from D'Ariano, Lo Presti and Paris, J. Opt. B 4 S273 (2002). The generalized channel-discrimination formulas are from Manna, Das Bhowmik and Saha, Phys. Rev. A 112, 042215 (2025). Entanglement Trap contributes the interactive, executable laboratory around it.</p>
+</footer>
