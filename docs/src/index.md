@@ -6,9 +6,9 @@ The lab compares a separable probe with a maximally entangled probe across three
 
 | Verdict | Comparison | Result |
 | --- | --- | --- |
-| HURTS | Identity vs. `V`, dimension 256 | `1.000000` separable; `0.507782` maximally entangled |
-| HELPS | Identity vs. fully depolarizing qubit channel | `0.750000` separable; `0.875000` Bell-probe theoretical ceiling |
-| NEUTRAL | Four-Pauli rotations at `θ = π/8` | `0.853553` for both optimal strategies |
+| HURTS | Identity vs. `V`, dimension 256 | `1.0` separable; `0.507781982421875` maximally entangled |
+| HELPS | Identity vs. fully depolarizing qubit channel | `0.75` separable; `0.875` Bell-probe theoretical ceiling |
+| NEUTRAL | Four-Pauli rotations at `θ = π/8` | `0.8535533905932737` for both optimal strategies |
 
 These values have different evidence status. The main interactive run submits a four-circuit batch for the HURTS pair to the backend selected by Qollab. The resource gallery displays analytic claims and circuit descriptions without submitting backend jobs. HELPS `0.875` is a theoretical ceiling and has no implemented live measurement path. The Four-Pauli Bell discriminator is tested with exact statevector simulation, not hardware.
 
@@ -32,3 +32,7 @@ The book follows the same path as the project: start with the question, run the 
 The project reproduces and operationalizes prior channel-discrimination results. It does not claim a new theorem or quantum computational advantage. Small instances are classically simulable. The displayed strategy values are analytic, theoretical ceilings, or empirical measurements only where the interface labels them as such.
 
 The machine-readable [claim ledger](../../claims.json) records formulas, values, dimensions, and whether each claim is safe to display. The code and tests are the executable source of the implementation details.
+
+## A companion learning path
+
+[Entangle Lab](../../entangle-lab/index.html) is the zero-backend on-ramp in this repository. Its singlet playground lets you change Alice's and Bob's measurement angles, sample one correlated outcome, and estimate the CHSH statistic from finite samples. Its [nine-chapter field guide](../../entangle-lab/docs/src/SUMMARY.md) builds the intuition used here. The Lab teaches quantum correlations; this book and the Qollab submission focus on channel discrimination.

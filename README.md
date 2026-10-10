@@ -1,14 +1,28 @@
 # Entanglement Trap
 
-**Entanglement is a resource, not a guarantee.** Entanglement Trap is an interactive, Qiskit-based channel-discrimination lab that compares three carefully labeled cases: entanglement hurts, helps, or ties. Each result is linked to its formula, implementation status, and evidence.
+**Entanglement is a resource, not a guarantee.** This repository contains two complementary learning experiences. Entanglement Trap is the Qollab hackathon submission: a Qiskit channel-discrimination game with three carefully labeled results—entanglement hurts, helps, or ties. Entangle Lab is the no-backend teaching on-ramp: a browser-based singlet and CHSH playground that lets learners explore quantum correlations first.
 
-The project is designed for three people:
+## Two experiences, one learning path
+
+| | Entanglement Trap | [Entangle Lab](entangle-lab/index.html) |
+| --- | --- | --- |
+| **Purpose** | Show when entanglement helps, hurts, or ties in channel discrimination. | Let learners explore entanglement and Bell correlations by changing measurement angles. |
+| **Run model** | Qollab-selected backend through the Python bridge; one backend job for the flagship run. | Ideal singlet probability model in the browser; no backend or quantum hardware. |
+| **Hook** | At `d = 256`, the separable strategy gives `1.0` while the implemented maximally entangled strategy gives `0.507781982421875`. | Alice and Bob get individually random outcomes with correlations that vary as `−cos(a − b)`; the CHSH test compares `|S|` with the local bound `2`. |
+| **Depth** | Three channel-pair verdicts, executable flagship circuits, four proof figures, the expert-evidence drawer, a resource gallery, and a provenance-tagged claim ledger. | Adjustable analyzer angles, single-pair sampling, finite-shot CHSH estimates, and a nine-chapter field guide. |
+| **Role in the submission** | The project judges should evaluate. | An optional conceptual on-ramp for judges and learners who want to play before studying channel discrimination. |
+
+These experiences answer different questions. Entangle Lab introduces quantum correlations; Entanglement Trap tests a resource assumption in channel discrimination. The Trap is the submitted work. The Lab supports the learning path and is not presented as the core hackathon result.
+
+For the HURTS pair at `d = 256`, the maximally entangled outputs have signed overlap `−0.9921875`. The implemented measurement gives `0.507781982421875`; even the optimal Helstrom measurement for that probe is capped at `0.5623778102448098`. The code keeps that ceiling distinct from the executable strategy value.
+
+## Who Entanglement Trap is for
 
 - **Students** meeting quantum channel discrimination for the first time: compare the probes and see what changes.
 - **Educators** who need a short lecture demonstration: use the HURTS result as a 15-second surprise, then unpack the channels and measurement in a three-minute discussion.
 - **Researchers** checking assumptions about probe resources: inspect the channel definitions, analytic values, executable circuits, and claim ledger.
 
-The interactive lab runs as a Qollab project. The source page is a Qollab-injected HTML fragment; `main.js` and `main.css` are loaded by the Qollab runtime. The Python bridge uses Qiskit circuits and one backend job for the flagship run. The resource gallery is metadata-only and submits no jobs.
+The Entanglement Trap page runs as a Qollab project. The source page is a Qollab-injected HTML fragment; `main.js` and `main.css` are loaded by the Qollab runtime. Its Python bridge uses Qiskit circuits and one backend job for the flagship run. The resource gallery is metadata-only and submits no jobs.
 
 ## Three outcomes, one question
 
@@ -71,7 +85,7 @@ To check one flagship batch locally, run the engine tests; they use Qiskit Aer a
 
 ## Read the docs
 
-The [Entanglement Trap field guide](docs/src/SUMMARY.md) is an mdBook covering the experiment, channel discrimination, the three cases, evidence labels, limitations, and the extension interface.
+The [Entanglement Trap field guide](docs/src/SUMMARY.md) covers channel discrimination, the three results, evidence labels, limitations, and the extension interface. The [Entangle Lab field guide](entangle-lab/docs/src/SUMMARY.md) introduces qubits, singlets, measurement, and the CHSH test in nine chapters.
 
 ```sh
 cd docs
@@ -79,7 +93,15 @@ mdbook build
 mdbook serve --open
 ```
 
-The generated book is written to `docs/book/` and is not committed. See [docs/README.md](docs/README.md) for book maintenance and validation.
+The Trap book is generated in `docs/book/`. To build the Lab book, run `cd entangle-lab/docs`, then `mdbook build`; its output is `entangle-lab/docs/book/`. Generated books are ignored by Git. See [docs/README.md](docs/README.md) for the Trap book workflow.
+
+To run Entangle Lab locally, start a static server from the repository root and open its subdirectory:
+
+```sh
+python -m http.server 8000
+```
+
+Visit <http://localhost:8000/entangle-lab/>. The Lab computes the ideal singlet distribution in JavaScript and does not require Qollab, Qiskit, or a backend.
 
 ## Acknowledgment
 
