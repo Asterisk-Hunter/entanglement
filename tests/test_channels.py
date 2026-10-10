@@ -1,8 +1,8 @@
-"""Regression tests for the extensible `ChannelPair` API and the two verified pairs.
+"""Regression tests for the extensible `ChannelPair` API and three channel pairs.
 
-Task 2 scope: the fork interface, the HURTS flagship pair (identity vs `V`), the
-HELPS pair (identity vs depolarizing), and the extension contract. Nothing here
-branches on a specific pair slug except the loader tests themselves.
+Coverage includes the channel-pair interface, HURTS, HELPS, and Four-Pauli
+implementations, and the extension contract. Pair-specific branching is
+confined to loader tests.
 """
 
 from __future__ import annotations
@@ -190,7 +190,7 @@ def test_depolarizing_claims_are_listed_in_the_machine_readable_ledger() -> None
 
 
 def test_hurts_bounds_come_from_task1_formulas() -> None:
-    """HURTS must call the Task 1 kernel, not restate its constants."""
+    """HURTS must call the shared science kernel, not restate its constants."""
     bounds = load_pair(HURTS_SLUG_EXPECTED).analytic_bounds()
     dimension = load_pair(HURTS_SLUG_EXPECTED).dimension
     assert bounds["separable"] == science.SEPARABLE_SUCCESS
@@ -298,7 +298,7 @@ def test_hurts_build_a_is_the_identity_channel() -> None:
 
 
 def test_hurts_build_b_is_the_v_oracle_up_to_global_phase() -> None:
-    """Same channel as the shared Task 1 builder: process fidelity, not phases."""
+    """Same channel as the shared oracle builder, ignoring global phase."""
     pair = load_pair(HURTS_SLUG_EXPECTED)
     num_system_qubits, total_qubits = 3, 5
     built = Operator(pair.build_b(num_system_qubits, total_qubits)).data

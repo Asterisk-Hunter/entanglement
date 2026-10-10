@@ -2,7 +2,7 @@
 
 Scope: analytic formulas, frozen claim fixtures, and the `V` oracle action.
 All values in `GOLDEN_*` tables are ANALYTIC values derived from the design
-spec formulas, except where a published figure is recorded separately.
+verified formulas, except where a historical printed value is recorded separately.
 """
 
 from __future__ import annotations
@@ -38,7 +38,7 @@ from quantum.science import (  # noqa: E402
 
 CLAIMS_PATH = REPO_ROOT / "claims.json"
 
-# ANALYTIC golden values from the spec formulas
+# ANALYTIC golden values from the implemented formulas
 #   overlap(d)  = (2 - d) / d
 #   p_helstrom  = 1/2 * (1 + sqrt(1 - overlap^2))
 #   p_simple    = 1 - overlap^2 / 2
@@ -49,7 +49,7 @@ GOLDEN = {
     256: {"overlap": -0.9921875, "simple": 0.507781982421875, "helstrom": 0.5623778102448098},
 }
 
-# Figures printed in the design spec at d = 256 (kept verbatim as published).
+# Historical printed values retained for audit; never display without checking.
 PUBLISHED_D256 = {
     "simple": 0.5078125,
     "helstrom": 0.562378286,

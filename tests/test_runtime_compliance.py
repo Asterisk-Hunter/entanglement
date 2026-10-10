@@ -142,7 +142,7 @@ def test_main_css_carries_the_merged_figure_gallery_and_expert_rules() -> None:
 
 
 def test_main_css_keeps_every_design_token_value_from_the_merge() -> None:
-    """Tokens move, they do not change. Pinned against the archived design spec."""
+    """Keep the visual tokens stable as part of the checked-in interface."""
     css = _read(MAIN_CSS)
     expected = {
         "--ink-000": "#0b0e14",

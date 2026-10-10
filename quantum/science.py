@@ -2,10 +2,10 @@
 
 The formulas here reproduce the verified values for the flagship channel pair
 (identity `I` versus `V = 2|0...0><0...0| - I`) with a maximally entangled probe
-of dimension `d`, as specified in the design spec. Every number returned by
+of dimension `d`, following Lien and Quintino (2026). Every number returned by
 this module is an ANALYTIC value; none of them is a measurement.
 
-Formulas (design spec, "Human-verified science"):
+Formulas (Lien and Quintino, arXiv:2605.31519):
 
     overlap(d)       = (2 - d) / d
     p_helstrom(d)    = 1/2 * (1 + sqrt(1 - overlap(d)^2))

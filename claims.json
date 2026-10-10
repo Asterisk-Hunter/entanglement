@@ -16,10 +16,11 @@
       "unit": "overlap",
       "dimension": 256,
       "formula": "overlap(d) = (2 - d) / d",
-      "source": "design spec, 'Human-verified science'",
+      "source": "Lien & Quintino (2026), arXiv:2605.31519; formula implemented in quantum.science and checked in tests/test_science.py.",
       "reproduced": true,
       "safe_for_demo": true,
-      "notes": "Overlap of the two channel outputs for the maximally entangled probe."
+      "notes": "Overlap of the two channel outputs for the maximally entangled probe.",
+      "source_url": "https://arxiv.org/abs/2605.31519"
     },
     {
       "id": "flagship_simple_maxent_d256_formula",
@@ -28,10 +29,11 @@
       "unit": "success_probability",
       "dimension": 256,
       "formula": "p_simple(d) = 1 - overlap(d)^2 / 2",
-      "source": "design spec, 'Human-verified science' (formula evaluated at d = 256)",
+      "source": "Lien & Quintino (2026), arXiv:2605.31519; formula implemented in quantum.science and checked in tests/test_science.py.",
       "reproduced": true,
       "safe_for_demo": true,
-      "notes": "Value returned by quantum.science.simple_success(256)."
+      "notes": "Value returned by quantum.science.simple_success(256).",
+      "source_url": "https://arxiv.org/abs/2605.31519"
     },
     {
       "id": "flagship_simple_maxent_d256_printed",
@@ -39,11 +41,11 @@
       "value": 0.5078125,
       "unit": "success_probability",
       "dimension": 256,
-      "formula": "printed figure in the design spec; inconsistent with p_simple(d) = 1 - overlap(d)^2 / 2 by 3.0517578125e-05",
-      "source": "design spec, 'Human-verified science' (printed value)",
+      "formula": "Historical printed value; differs from the implemented formula by 3.0517578125e-05.",
+      "source": "Historical internal project design note (not included in this repository); retained only for audit.",
       "reproduced": false,
       "safe_for_demo": false,
-      "notes": "Historical note: the design spec prints 0.5078125 but its own formula gives 0.507781982421875. Preserved verbatim for the record; the formula value is authoritative and this entry must not be shown as an analytic value."
+      "notes": "Historical note: an internal project design note printed 0.5078125, while its formula gives 0.507781982421875. The formula value is authoritative; this record is preserved for audit and must not be shown as an analytic value."
     },
     {
       "id": "flagship_helstrom_maxent_d256",
@@ -52,10 +54,11 @@
       "unit": "success_probability",
       "dimension": 256,
       "formula": "p_helstrom(d) = 1/2 * (1 + sqrt(1 - overlap(d)^2))",
-      "source": "design spec, 'Human-verified science' (formula evaluated at d = 256)",
+      "source": "Lien & Quintino (2026), arXiv:2605.31519; formula implemented in quantum.science and checked in tests/test_science.py.",
       "reproduced": true,
       "safe_for_demo": true,
-      "notes": "Value returned by quantum.science.helstrom_ceiling(256); spec prints ~0.562378286, consistent to the printed precision."
+      "notes": "Value returned by quantum.science.helstrom_ceiling(256); spec prints ~0.562378286, consistent to the printed precision.",
+      "source_url": "https://arxiv.org/abs/2605.31519"
     },
     {
       "id": "flagship_separable_d256",
@@ -64,10 +67,11 @@
       "unit": "success_probability",
       "dimension": 256,
       "formula": "separable two-basis-state strategy succeeds with certainty",
-      "source": "design spec, 'Human-verified science'",
+      "source": "Lien & Quintino (2026), arXiv:2605.31519; formula implemented in quantum.science and checked in tests/test_science.py.",
       "reproduced": true,
       "safe_for_demo": true,
-      "notes": "quantum.science.SEPARABLE_SUCCESS."
+      "notes": "quantum.science.SEPARABLE_SUCCESS.",
+      "source_url": "https://arxiv.org/abs/2605.31519"
     },
     {
       "id": "flagship_overlap_d4",
@@ -76,9 +80,10 @@
       "unit": "overlap",
       "dimension": 4,
       "formula": "overlap(d) = (2 - d) / d",
-      "source": "design spec formula, golden fixture",
+      "source": "Lien & Quintino (2026), arXiv:2605.31519; formula implemented in quantum.science and checked in tests/test_science.py.",
       "reproduced": true,
-      "safe_for_demo": true
+      "safe_for_demo": true,
+      "source_url": "https://arxiv.org/abs/2605.31519"
     },
     {
       "id": "flagship_simple_d4",
@@ -87,9 +92,10 @@
       "unit": "success_probability",
       "dimension": 4,
       "formula": "p_simple(d) = 1 - overlap(d)^2 / 2",
-      "source": "design spec formula, golden fixture",
+      "source": "Lien & Quintino (2026), arXiv:2605.31519; formula implemented in quantum.science and checked in tests/test_science.py.",
       "reproduced": true,
-      "safe_for_demo": true
+      "safe_for_demo": true,
+      "source_url": "https://arxiv.org/abs/2605.31519"
     },
     {
       "id": "flagship_helstrom_d4",
@@ -98,9 +104,10 @@
       "unit": "success_probability",
       "dimension": 4,
       "formula": "p_helstrom(d) = 1/2 * (1 + sqrt(1 - overlap(d)^2))",
-      "source": "design spec formula, golden fixture",
+      "source": "Lien & Quintino (2026), arXiv:2605.31519; formula implemented in quantum.science and checked in tests/test_science.py.",
       "reproduced": true,
-      "safe_for_demo": true
+      "safe_for_demo": true,
+      "source_url": "https://arxiv.org/abs/2605.31519"
     },
     {
       "id": "flagship_overlap_d16",
@@ -109,9 +116,10 @@
       "unit": "overlap",
       "dimension": 16,
       "formula": "overlap(d) = (2 - d) / d",
-      "source": "design spec formula, golden fixture",
+      "source": "Lien & Quintino (2026), arXiv:2605.31519; formula implemented in quantum.science and checked in tests/test_science.py.",
       "reproduced": true,
-      "safe_for_demo": true
+      "safe_for_demo": true,
+      "source_url": "https://arxiv.org/abs/2605.31519"
     },
     {
       "id": "flagship_simple_d16",
@@ -120,9 +128,10 @@
       "unit": "success_probability",
       "dimension": 16,
       "formula": "p_simple(d) = 1 - overlap(d)^2 / 2",
-      "source": "design spec formula, golden fixture",
+      "source": "Lien & Quintino (2026), arXiv:2605.31519; formula implemented in quantum.science and checked in tests/test_science.py.",
       "reproduced": true,
-      "safe_for_demo": true
+      "safe_for_demo": true,
+      "source_url": "https://arxiv.org/abs/2605.31519"
     },
     {
       "id": "flagship_helstrom_d16",
@@ -131,9 +140,10 @@
       "unit": "success_probability",
       "dimension": 16,
       "formula": "p_helstrom(d) = 1/2 * (1 + sqrt(1 - overlap(d)^2))",
-      "source": "design spec formula, golden fixture",
+      "source": "Lien & Quintino (2026), arXiv:2605.31519; formula implemented in quantum.science and checked in tests/test_science.py.",
       "reproduced": true,
-      "safe_for_demo": true
+      "safe_for_demo": true,
+      "source_url": "https://arxiv.org/abs/2605.31519"
     },
     {
       "id": "flagship_overlap_d64",
@@ -142,9 +152,10 @@
       "unit": "overlap",
       "dimension": 64,
       "formula": "overlap(d) = (2 - d) / d",
-      "source": "design spec formula, golden fixture",
+      "source": "Lien & Quintino (2026), arXiv:2605.31519; formula implemented in quantum.science and checked in tests/test_science.py.",
       "reproduced": true,
-      "safe_for_demo": true
+      "safe_for_demo": true,
+      "source_url": "https://arxiv.org/abs/2605.31519"
     },
     {
       "id": "flagship_simple_d64",
@@ -153,9 +164,10 @@
       "unit": "success_probability",
       "dimension": 64,
       "formula": "p_simple(d) = 1 - overlap(d)^2 / 2",
-      "source": "design spec formula, golden fixture",
+      "source": "Lien & Quintino (2026), arXiv:2605.31519; formula implemented in quantum.science and checked in tests/test_science.py.",
       "reproduced": true,
-      "safe_for_demo": true
+      "safe_for_demo": true,
+      "source_url": "https://arxiv.org/abs/2605.31519"
     },
     {
       "id": "flagship_helstrom_d64",
@@ -164,9 +176,10 @@
       "unit": "success_probability",
       "dimension": 64,
       "formula": "p_helstrom(d) = 1/2 * (1 + sqrt(1 - overlap(d)^2))",
-      "source": "design spec formula, golden fixture",
+      "source": "Lien & Quintino (2026), arXiv:2605.31519; formula implemented in quantum.science and checked in tests/test_science.py.",
       "reproduced": true,
-      "safe_for_demo": true
+      "safe_for_demo": true,
+      "source_url": "https://arxiv.org/abs/2605.31519"
     },
     {
       "id": "four_pauli_star_theta_pi_8",

@@ -1,8 +1,8 @@
 """Regression tests for the one-batch flagship quantum engine.
 
-Task 3 scope: four-circuit batch construction, single-invocation execution,
+Coverage includes four-circuit batch construction, single-invocation execution,
 little-endian count parsing, idle-padding verification, explicit provenance,
-and unconfusable round-versus-benchmark result types.
+and distinct round-versus-benchmark result types.
 
 Every backend here is a fake. Nothing in this file imports qiskit_aer.
 """
@@ -56,7 +56,7 @@ TOTAL_QUBITS = 16
 FLAGGESHIP_D = 256
 FLAGGESHIP_N = 8
 
-# Frozen flagship values, read from the Task 1 kernel rather than restated.
+# Frozen flagship values from the science kernel.
 FLAGSHIP_OVERLAP = -0.9921875
 FLAGSHIP_SIMPLE = 0.507781982421875
 FLAGSHIP_CEILING = 0.5623778102448098
@@ -174,7 +174,7 @@ def _ideal_maxent_counts(
     """Max-ent outcomes split by whether the two halves agree.
 
     Under channel A the halves always agree. Under channel B they agree with
-    probability `overlap(d)**2`, using the Task 1 kernel.
+    probability `overlap(d)**2`, using the science kernel.
     """
     dimension = 2**num_system_qubits
     if not channel_b:
