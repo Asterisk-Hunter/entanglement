@@ -1,0 +1,37 @@
+<template>
+  <style>
+    @font-face { font-family: "JetBrains Mono"; src: url("assets/fonts/JetBrainsMono-Regular.woff2") format("woff2"); font-weight: 400; font-display: block; }
+    @font-face { font-family: "JetBrains Mono"; src: url("assets/fonts/JetBrainsMono-Bold.woff2") format("woff2"); font-weight: 700 900; font-display: block; }
+    #root { position: relative; width: 1920px; height: 1080px; overflow: hidden; color: #f2f0ff; font-family: "JetBrains Mono", monospace; }
+    .f03-bg { position: absolute; inset: 0; background: #0b0e14; }
+    .f03-img { position: absolute; left: 64px; top: 224px; width: 1200px; height: 600px; object-fit: contain; }
+    .f03-kicker { position: absolute; left: 72px; top: 88px; color: #e9b44c; font-size: 30px; letter-spacing: .12em; }
+    .f03-rule { position: absolute; left: 1330px; top: 244px; width: 2px; height: 430px; background: #333d4c; }
+    .f03-label { position: absolute; left: 1370px; top: 276px; color: #a3adbb; font-size: 28px; letter-spacing: .1em; line-height: 1.4; }
+    .f03-impact { position: absolute; left: 1370px; top: 374px; width: 470px; color: #e9b44c; font-size: 54px; font-weight: 700; line-height: 1.12; }
+    .f03-proof { position: absolute; left: 1370px; top: 650px; color: #a3adbb; font-size: 28px; line-height: 1.4; }
+    .f03-cover { position: absolute; left: 64px; top: 440px; width: 850px; height: 82px; background: #0b0e14; transform-origin: left center; }
+  </style>
+  <div id="root" data-composition-id="03-the-reversal" data-start="0" data-duration="5" data-width="1920" data-height="1080">
+    <div id="f03-bg" class="clip f03-bg" data-start="0" data-duration="5" data-track-index="0"></div>
+    <div id="f03-kicker" class="clip f03-kicker" data-start="0" data-duration="5" data-track-index="1">03 / SAME TASK · SAME DIMENSION</div>
+    <img id="f03-img" class="clip f03-img" src="assets/trap-benchmark.png" alt="Analytic d=256 benchmark values for both probes" data-start="0" data-duration="5" data-track-index="2">
+    <div class="clip f03-cover" id="f03-cover" data-start="0" data-duration="5" data-track-index="3"></div>
+    <div class="clip f03-rule" id="f03-rule" data-start="0" data-duration="5" data-track-index="4"></div>
+    <div class="clip f03-label" id="f03-label" data-start="0" data-duration="5" data-track-index="5">THE<br>REVERSAL</div>
+    <div class="clip f03-impact" id="f03-impact" data-start="0" data-duration="5" data-track-index="6">MORE<br>ENTANGLEMENT<br>MADE YOU WORSE.</div>
+    <div class="clip f03-proof" id="f03-proof" data-start="0" data-duration="5" data-track-index="7">ANALYTIC<br>EXECUTABLE VALUES</div>
+  </div>
+  <script>
+    (() => {
+      const tl = gsap.timeline({ paused: true });
+      tl.fromTo("#f03-img", { opacity: 0 }, { opacity: 1, duration: 0.28 }, 0);
+      tl.fromTo("#f03-label", { opacity: 0, y: 18 }, { opacity: 1, y: 0, duration: 0.42, ease: "power3.out" }, 0.28);
+      tl.fromTo("#f03-proof", { opacity: 0 }, { opacity: 1, duration: 0.28 }, 0.48);
+      tl.fromTo("#f03-impact", { opacity: 0, x: 34, scale: 0.94 }, { opacity: 1, x: 0, scale: 1, duration: 0.52, ease: "power3.out" }, 2.6);
+      tl.fromTo("#f03-rule", { scaleY: 0 }, { scaleY: 1, duration: 0.38, ease: "power3.out" }, 2.42);
+      window.__timelines["03-the-reversal"] = tl;
+      tl.seek(0);
+    })();
+  </script>
+</template>

@@ -1,0 +1,56 @@
+<template>
+  <style>
+    @font-face { font-family: "JetBrains Mono"; src: url("assets/fonts/JetBrainsMono-Regular.woff2") format("woff2"); font-weight: 400; font-display: block; }
+    @font-face { font-family: "JetBrains Mono"; src: url("assets/fonts/JetBrainsMono-Bold.woff2") format("woff2"); font-weight: 700 900; font-display: block; }
+    #root { position: relative; width: 1920px; height: 1080px; overflow: hidden; color: #f2f0ff; font-family: "JetBrains Mono", monospace; }
+    .f06-bg { position: absolute; inset: 0; background: #0b0e14; }
+    .f06-kicker { position: absolute; left: 72px; top: 68px; color: #e9b44c; font-size: 30px; letter-spacing: .12em; }
+    .f06-tag { position: absolute; top: 208px; width: 500px; height: 74px; border: 1px solid #5f6d7d; color: #e9b44c; text-align: center; padding-top: 17px; font-size: 30px; letter-spacing: .08em; }
+    .f06-tag-a { left: 72px; }
+    .f06-tag-b { left: 590px; }
+    .f06-tag-c { left: 1108px; }
+    .f06-cite { position: absolute; left: 72px; top: 356px; border-left: 2px solid #e9b44c; padding-left: 24px; color: #a3adbb; font-size: 30px; line-height: 1.45; }
+    .f06-honesty { position: absolute; left: 72px; top: 496px; color: #f2f0ff; font-size: 38px; font-weight: 700; line-height: 1.32; }
+    .f06-test { position: absolute; left: 72px; top: 710px; color: #e9b44c; font-size: 28px; letter-spacing: .06em; }
+    .f06-lock { position: absolute; left: 72px; top: 230px; width: 1760px; border-top: 2px solid #e9b44c; padding-top: 54px; }
+    .f06-title { color: #f2f0ff; font-size: 72px; font-weight: 700; letter-spacing: -.03em; }
+    .f06-sub { color: #a3adbb; font-size: 30px; margin-top: 26px; }
+    .f06-url-label { color: #e9b44c; font-size: 28px; letter-spacing: .12em; margin-top: 70px; }
+    .f06-url { color: #f2f0ff; font-size: 34px; margin-top: 18px; white-space: nowrap; }
+    .f06-cta { color: #a3adbb; font-size: 28px; margin-top: 20px; }
+  </style>
+  <div id="root" data-composition-id="06-honesty-cta" data-start="0" data-duration="4" data-width="1920" data-height="1080">
+    <div id="f06-bg" class="clip f06-bg" data-start="0" data-duration="4" data-track-index="0"></div>
+    <div class="clip f06-kicker" id="f06-kicker" data-start="0" data-duration="4" data-track-index="1">06 / SHOW YOUR WORK</div>
+    <div class="clip f06-tag f06-tag-a" id="f06-tag-a" data-start="0" data-duration="4" data-track-index="2">ANALYTIC</div>
+    <div class="clip f06-tag f06-tag-b" id="f06-tag-b" data-start="0" data-duration="4" data-track-index="3">EMPIRICAL</div>
+    <div class="clip f06-tag f06-tag-c" id="f06-tag-c" data-start="0" data-duration="4" data-track-index="4">THEORETICAL_CEILING</div>
+    <div class="clip f06-cite" id="f06-cite" data-start="0" data-duration="4" data-track-index="5">EXPERT EVIDENCE / SOURCE DRAWER<br>LIEN &amp; QUINTINO (2026) · arXiv:2605.31519 · REPRODUCED</div>
+    <div class="clip f06-honesty" id="f06-honesty" data-start="0" data-duration="4" data-track-index="6">NO NEW THEOREM.<br>NO QUANTUM COMPUTATIONAL ADVANTAGE CLAIM.<br>SMALL INSTANCES ARE CLASSICALLY SIMULABLE.</div>
+    <div class="clip f06-test" id="f06-test" data-start="0" data-duration="4" data-track-index="7">UNSAFE CLAIMS QUARANTINED · test_bridge_contract.py · test_visual_metrics.py</div>
+    <div class="clip f06-lock" id="f06-lock" data-start="0" data-duration="4" data-track-index="8">
+      <div class="f06-title">ENTANGLEMENT TRAP</div>
+      <div class="f06-sub">MORE ENTANGLEMENT MADE YOU WORSE.</div>
+      <div class="f06-url-label">OPEN SOURCE · PROJECT REPOSITORY</div>
+      <div class="f06-url">github.com/Asterisk-Hunter/entanglement</div>
+      <div class="f06-cta">README · REPRODUCE THE CLAIMS · INSPECT THE TESTS</div>
+    </div>
+  </div>
+  <script>
+    (() => {
+      const tl = gsap.timeline({ paused: true });
+      tl.fromTo("#f06-kicker", { opacity: 0 }, { opacity: 1, duration: 0.24 }, 0);
+      tl.fromTo("#f06-tag-a", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.32, ease: "power3.out" }, 0.18);
+      tl.fromTo("#f06-tag-b", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.32, ease: "power3.out" }, 0.38);
+      tl.fromTo("#f06-tag-c", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.32, ease: "power3.out" }, 0.58);
+      tl.fromTo("#f06-cite", { opacity: 0 }, { opacity: 1, duration: 0.3 }, 0.82);
+      tl.fromTo("#f06-honesty", { opacity: 0, x: 20 }, { opacity: 1, x: 0, duration: 0.38, ease: "power3.out" }, 1.28);
+      tl.fromTo("#f06-test", { opacity: 0 }, { opacity: 1, duration: 0.3 }, 1.78);
+      tl.to(["#f06-kicker", "#f06-tag-a", "#f06-tag-b", "#f06-tag-c", "#f06-cite", "#f06-honesty", "#f06-test"], { opacity: 0, duration: 0.2 }, 2.48);
+      tl.fromTo("#f06-lock", { opacity: 0, y: 28 }, { opacity: 1, y: 0, duration: 0.42, ease: "power3.out" }, 2.55);
+      tl.fromTo(".f06-url", { color: "#a3adbb" }, { color: "#f2f0ff", duration: 0.35 }, 3.1);
+      window.__timelines["06-honesty-cta"] = tl;
+      tl.seek(0);
+    })();
+  </script>
+</template>

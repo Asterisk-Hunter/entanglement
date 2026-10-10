@@ -85,6 +85,8 @@ To check one flagship batch locally, run the engine tests; they use Qiskit Aer a
 
 ## Read the docs
 
+Watch the [26-second Entanglement Trap video](videos/entanglement-trap/renders/video.mp4) for the core result, its provenance labels, and the limits of the claim.
+
 The [Entanglement Trap field guide](docs/src/SUMMARY.md) covers channel discrimination, the three results, evidence labels, limitations, and the extension interface. The [Entangle Lab field guide](entangle-lab/docs/src/SUMMARY.md) introduces qubits, singlets, measurement, and the CHSH test in nine chapters.
 
 ```sh

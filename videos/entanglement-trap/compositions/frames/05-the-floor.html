@@ -1,0 +1,29 @@
+<template>
+  <style>
+    @font-face { font-family: "JetBrains Mono"; src: url("assets/fonts/JetBrainsMono-Regular.woff2") format("woff2"); font-weight: 400; font-display: block; }
+    @font-face { font-family: "JetBrains Mono"; src: url("assets/fonts/JetBrainsMono-Bold.woff2") format("woff2"); font-weight: 700 900; font-display: block; }
+    #root { position: relative; width: 1920px; height: 1080px; overflow: hidden; color: #f2f0ff; font-family: "JetBrains Mono", monospace; }
+    .f05-bg { position: absolute; inset: 0; background: #0b0e14; }
+    .f05-kicker { position: absolute; left: 72px; top: 90px; color: #a3adbb; font-size: 30px; letter-spacing: .12em; }
+    .f05-image { position: absolute; left: 360px; top: 326px; width: 1200px; height: 420px; object-fit: contain; }
+    .f05-rule { position: absolute; left: 360px; top: 818px; width: 1200px; height: 2px; background: #333d4c; transform-origin: left; }
+    .f05-copy { position: absolute; left: 360px; top: 850px; color: #a3adbb; font-size: 30px; letter-spacing: .08em; }
+  </style>
+  <div id="root" data-composition-id="05-the-floor" data-start="0" data-duration="5" data-width="1920" data-height="1080">
+    <div id="f05-bg" class="clip f05-bg" data-start="0" data-duration="5" data-track-index="0"></div>
+    <div id="f05-kicker" class="clip f05-kicker" data-start="0" data-duration="5" data-track-index="1">05 / THE FLOOR</div>
+    <img id="f05-image" class="clip f05-image" src="assets/trap-floor.png" alt="Exact Helstrom theoretical ceiling" data-start="0" data-duration="5" data-track-index="2">
+    <div id="f05-rule" class="clip f05-rule" data-start="0" data-duration="5" data-track-index="3"></div>
+    <div id="f05-copy" class="clip f05-copy" data-start="0" data-duration="5" data-track-index="4">THE OPTIMAL DETECTOR CANNOT EXCEED THIS CEILING.</div>
+  </div>
+  <script>
+    (() => {
+      const tl = gsap.timeline({ paused: true });
+      tl.fromTo("#f05-image", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, 0.65);
+      tl.fromTo("#f05-rule", { scaleX: 0 }, { scaleX: 1, duration: 0.55, ease: "power3.out" }, 2.05);
+      tl.fromTo("#f05-copy", { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.4, ease: "power3.out" }, 2.48);
+      window.__timelines["05-the-floor"] = tl;
+      tl.seek(0);
+    })();
+  </script>
+</template>
