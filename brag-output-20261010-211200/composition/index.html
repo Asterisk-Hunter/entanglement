@@ -7,6 +7,7 @@
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
   <style>
     * { box-sizing: border-box; }
+    @font-face { font-family: "Noto Color Emoji"; src: local("Noto Color Emoji"); }
     body { margin: 0; background: #0b0e19; color: #f2f0ff; font-family: Arial, sans-serif; }
     #root { position: relative; width: 100%; height: 100%; overflow: hidden; background: #0b0e19; }
     .scene { position: absolute; inset: 0; display: grid; place-items: center; overflow: hidden; background: radial-gradient(ellipse at 50% 40%, #17162a 0%, #0b0e19 68%); }
@@ -22,6 +23,7 @@
     .score strong { display: block; margin-top: 8px; font-size: 66px; letter-spacing: -.04em; }
     .score small { display: block; font: 22px 'DM Mono', monospace; color: #aaa7be; margin-top: 4px; }
     .brand { position: absolute; z-index: 3; left: 120px; top: 70px; font-size: 25px; font-weight: 800; letter-spacing: -.04em; }
+    .atom { display: inline-block; margin-right: 10px; font-family: "Noto Color Emoji", sans-serif; font-size: 23px; vertical-align: 2px; }
     .brand i { color: #c4a9ff; font-style: normal; }
     .end-title { font-size: 104px; }
     .end-link { margin-top: 25px; font: 24px 'DM Mono', monospace; color: #c4a9ff; }
@@ -31,9 +33,10 @@
 </head>
 <body>
 <div id="root" data-composition-id="entangle-brag" data-start="0" data-width="1920" data-height="1080" data-duration="22">
+  <script src="assets/audio/music-data.js"></script>
   <section id="scene-hook" class="scene hero clip" data-start="0" data-duration="3">
     <img id="shot-hero" src="assets/screenshots/hero-wide.png" alt="Entangle Lab home screen">
-    <div class="wash"></div><div class="halo"></div><div class="brand">ENTANGLE <i>LAB</i></div>
+    <div class="wash"></div><div class="halo" data-layout-allow-overflow></div><div class="brand"><span class="atom" aria-hidden="true">⚛️</span>ENTANGLE <i>LAB</i></div>
     <div class="copy"><div class="eyebrow">An interactive quantum experiment</div><h1 id="title-hook">Two particles.<br>One strange pattern.</h1><p id="sub-hook">Explore the singlet state, one measurement at a time.</p></div>
   </section>
   <section id="scene-pair" class="scene clip" data-start="3" data-duration="4">
@@ -54,7 +57,9 @@
   </section>
   <div class="grain"></div>
   <audio id="narration" src="assets/voiceover/narration.wav" data-start="0" data-duration="21.2" data-volume="1"></audio>
-  <audio id="music" src="assets/music/happy-beats-business-moves-vol-12-by-ende-dot-app.mp3" data-start="0" data-duration="22" data-volume="0.17"></audio>
+  <audio id="music" src="assets/music/happy-beats-business-moves-vol-12-by-ende-dot-app.mp3" data-start="0" data-duration="22" data-volume="0.17" data-automation='{"version":1,"lanes":[{"target":"volume","points":[{"t":0,"v":0},{"t":0.8,"v":0.17},{"t":8.74,"v":0.17},{"t":9,"v":0.21},{"t":10.2,"v":0.15},{"t":20.8,"v":0.15},{"t":22,"v":0}]}]}'></audio>
+  <audio id="measure-click" src="assets/sfx/click-soft.mp3" data-start="4.15" data-duration="0.37" data-volume="0.16"></audio>
+  <audio id="score-chime" src="assets/sfx/chime.mp3" data-start="8.74" data-duration="2.5" data-volume="0.09"></audio>
 </div>
 <script>
   const tl = gsap.timeline({ paused: true });
@@ -74,6 +79,12 @@
   tl.fromTo("#sub-end", { opacity: 0 }, { opacity: 1, duration: .6 }, 16.15);
   // beat-locked: 17.47s, bundled strong cue; final identity settles before narration ends.
   tl.fromTo(".end-link", { y: 14, opacity: 0 }, { y: 0, opacity: 1, duration: .55, ease: "power2.out" }, 17.47);
+  const halo = document.querySelector(".halo");
+  for (let f = 0; f < window.AUDIO_DATA.totalFrames; f++) {
+    const bass = window.AUDIO_DATA.frames[f].bands[0];
+    const scale = 1 + bass * .045;
+    tl.call((value => () => gsap.set(halo, { scale: value, transformOrigin: "center center" }))(scale), [], f / window.AUDIO_DATA.fps);
+  }
   tl.to("#root", { opacity: 1, duration: .01 }, 21.99);
   window.__timelines["entangle-brag"] = tl;
 </script>

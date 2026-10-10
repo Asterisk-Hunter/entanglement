@@ -2,21 +2,21 @@
 
 ## Glossary
 
-**Amplitude** — A complex number in a quantum state. Its squared magnitude contributes to a measurement probability.
+**Amplitude:** A complex number in a quantum state. Its squared magnitude contributes to a measurement probability.
 
-**Bell state** — One of four maximally entangled two-qubit states. The singlet is one of them.
+**Bell state:** One of four maximally entangled two-qubit states. The singlet is one of them.
 
-**Born rule** — The rule that maps quantum amplitudes to probabilities for measurement outcomes.
+**Born rule:** The rule that maps quantum amplitudes to probabilities for measurement outcomes.
 
-**Correlation, `E`** — The average product of paired outcomes `A × B`. For outcomes `±1`, it ranges from `−1` to `+1`.
+**Correlation, `E`:** The average product of paired outcomes `A × B`. For outcomes `±1`, it ranges from `−1` to `+1`.
 
-**Entangled state** — A joint state that cannot be written as a product of separate states for each subsystem.
+**Entangled state:** A joint state that cannot be written as a product of separate states for each subsystem.
 
-**Local hidden-variable model** — A class of models in which outcomes depend on shared past variables and each observer's local setting, with no influence from the distant setting.
+**Local hidden-variable model:** A class of models in which outcomes depend on shared past variables and each observer's local setting, with no influence from the distant setting.
 
-**Measurement setting** — The direction or configuration an observer chooses for a measurement.
+**Measurement setting:** The direction or configuration an observer chooses for a measurement.
 
-**Singlet** — The two-spin state `(|01⟩ − |10⟩)/√2`, with perfect anti-correlation for aligned spin measurements.
+**Singlet:** The two-spin state `(|01⟩ − |10⟩)/√2`, with perfect anti-correlation for aligned spin measurements.
 
 ## Further reading
 

@@ -26,8 +26,8 @@ Open the lab → measure one pair → run CHSH → inspect the guide.
 - Creative direction: polished science short, confident and curious, without hype.
 - Interpretation: Spacious framing and deliberate motion let the real experiment carry the story.
 
-## Format: landscape — 1920x1080
-## Duration: 20 seconds
+## Format: landscape: 1920x1080
+## Duration: 22 seconds
 
 ## Visual identity (from the project)
 - Background: #0b0e19
@@ -43,42 +43,42 @@ Two particles. One strange pattern. Explore the singlet state and run a Bell tes
 ## Audio direction
 - Role: cinematic support
 - Music: Happy Beats & Business Moves Vol. 12 by Sascha Ende, ENDE.APP, CC BY 4.0.
-- Music treatment: start immediately at low level, duck under narration, lift on the measured result, fade at the close.
+- Music treatment: fade up over 0.8s, stay low under narration, lift gently at the measured result, and fade out over the final 1.2s.
 - Music cue guidance: bundled cue preset; target 8.74s and 17.47s for the result and closing reveal.
-- Audio-reactive treatment: subtle; a violet halo breathes with the bed, without waveform graphics.
-- SFX posture: sparse, motion-matched interface ticks and one soft reveal accent.
+- Audio-reactive treatment: subtle; a violet halo follows the music's bass energy, without waveform graphics.
+- SFX posture: sparse, with a quiet measurement click and one soft score reveal accent.
 - Audio-coupled moments: analyzer angle changes, measurement result, and Bell score reveal.
 - Restraint rule: narration stays clear; no dramatic impacts over the science.
 
 ## Storyboard
 
-### Scene 1 — The pattern — 3s
+### Scene 1: The pattern: 3s
 Actual lab interface fills frame; title lands over the angle controls. “Two particles. One strange pattern.”
-Sequential/interaction: yes — the Alice and Bob angle values appear in sequence.
+Sequential/interaction: yes. The Alice and Bob angle values appear in sequence.
 Audio intent: restrained opening pulse under a curious, grounded voice.
-Audio-coupled idea: subtle ticks as the two settings settle.
-Transition mood: clean → Scene 2
+Audio-coupled idea: a quiet pulse under the two settings.
+Transition mood: clean, then Scene 2.
 
-### Scene 2 — One pair — 4s
+### Scene 2: One pair: 4s
 Show the real one-pair measurement result, with the opposite outcomes readable beside the app.
-Sequential/interaction: yes — simulate a click, then reveal Alice +1 and Bob -1.
+Sequential/interaction: yes. Simulate a click, then reveal Alice +1 and Bob -1.
 Audio intent: keep the bed low so the narration carries the idea.
-Audio-coupled idea: one quiet click and a soft result chime.
-Transition mood: soft → Scene 3
+Audio-coupled idea: one quiet click at the measurement and a soft result chime.
+Transition mood: soft, then Scene 3.
 
-### Scene 3 — Bell test — 7s
+### Scene 3: Bell test: 8s
 Show the actual CHSH result and sampled correlations. Set “|S| = 2.806” against the classical bound of 2.
-Sequential/interaction: yes — reveal the score, then the classical bound, then the four correlations.
+Sequential/interaction: yes. Reveal the score, then the classical bound, then the four correlations.
 Audio intent: build toward the score, then leave room for the result.
 Audio-coupled idea: score locks to the 8.74s strong cue; result accent stays subtle.
-Transition mood: clean → Scene 4
+Transition mood: clean, then Scene 4.
 
-### Scene 4 — Learn the model — 6s
+### Scene 4: Learn the model: 7s
 Show the real field guide, then close with Entangle Lab and the call to explore.
-Sequential/interaction: yes — chapter title and final tagline arrive in sequence, with a readable hold.
+Sequential/interaction: yes. Chapter title and final tagline arrive in sequence, with a readable hold.
 Audio intent: warm resolve, gently lift at the final line.
 Audio-coupled idea: closing title lands near the 17.47s cue.
-Transition mood: soft → end
+Transition mood: soft, then end.
 
 **Music mood for this video:** cinematic
 **Audio summary:** A light rhythmic bed supports a clear narration, with quiet interface accents and a measured lift at the sampled Bell result.
