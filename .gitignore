@@ -1,7 +1,15 @@
 __pycache__/
 *.pyc
+.venv/
 .pytest_cache/
 .ruff_cache/
 node_modules/
 **/docs/book/
+
+# Superseded promo work for the sibling teaching app.
+/brag-output-*/
+
+# HyperFrames editor state and per-frame review captures are regenerable.
+videos/*/.hyperframes/
+videos/*/snapshots/
 

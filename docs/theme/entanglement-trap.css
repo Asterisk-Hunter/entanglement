@@ -1,0 +1,46 @@
+/* Amber and ink tokens adapted from the Entanglement Trap interface. */
+:root {
+  --content-max-width: 900px;
+  --bg: #0b0e14;
+  --sidebar-bg: #10141d;
+  --fg: #d6d9e0;
+  --sidebar-fg: #a3adbb;
+  --sidebar-active: #e9b44c;
+  --links: #e9b44c;
+  --inline-code-color: #f2f0ff;
+  --quote-bg: #10141d;
+  --quote-border: #e9b44c;
+}
+
+html.coal, html.navy {
+  --bg: #0b0e14;
+  --sidebar-bg: #10141d;
+  --fg: #d6d9e0;
+  --sidebar-fg: #a3adbb;
+  --sidebar-active: #e9b44c;
+  --links: #e9b44c;
+  --inline-code-color: #f2f0ff;
+  --quote-bg: #10141d;
+  --quote-border: #e9b44c;
+}
+
+body { font-family: ui-sans-serif, system-ui, sans-serif; }
+.content main { line-height: 1.72; }
+.content main h1, .content main h2, .content main h3 { letter-spacing: -.025em; }
+.content main h1 { color: #f2f0ff; font-size: 2.25rem; }
+.content main h2 { margin-top: 2em; color: #e9b44c; }
+.content main h3 { color: #d9c18f; }
+.content main p, .content main li { color: #d6d9e0; }
+.content main strong { color: #f2f0ff; }
+.content main a { text-decoration-thickness: 1px; text-underline-offset: 3px; }
+.content main blockquote { border-left-color: #e9b44c; background: rgba(233,180,76,.08); }
+.content main blockquote p { color: #f2f0ff; }
+.content main code { border-radius: 4px; }
+.content main table { display: block; width: 100%; overflow-x: auto; border-collapse: collapse; }
+.content main th { color: #e9b44c; background: #10141d; }
+.content main td, .content main th { padding: .65rem .8rem; border: 1px solid #333d4c; }
+.content main tr:nth-child(even) { background: rgba(51,61,76,.22); }
+.sidebar .chapter li a { padding-block: 5px; }
+.sidebar .chapter li a.active { border-left: 2px solid #e9b44c; }
+.menu-bar { border-bottom-color: #333d4c; }
+:focus-visible { outline: 2px solid #e9b44c; outline-offset: 3px; }

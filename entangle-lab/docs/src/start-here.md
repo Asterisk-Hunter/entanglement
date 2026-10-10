@@ -8,7 +8,7 @@ From the repository root, start a local server:
 python -m http.server 8000
 ```
 
-Open <http://localhost:8000/entangle-lab/>. Entangle Lab uses plain HTML, CSS, and JavaScript. The simulation needs no installation and makes no network requests; optional typefaces are fetched from Google Fonts, with system fallbacks.
+Open <http://localhost:8000/entangle-lab/>. Entangle Lab uses plain HTML, CSS, and JavaScript. It needs no installation or app backend. The page loads optional typefaces from Google Fonts when available and falls back to system fonts.
 
 ## Your first experiment
 

@@ -49,9 +49,9 @@ This is a static, source-derived preview of the app controls. It does not imply 
 
 Scene 1 (0.0–1.0s): the controls crop sits left of center; d=256 and 2,000 shots are already selected. A compact `ONE ROUND` label enters above the crop. Asymmetric 65/35 layout.
 
-Scene 2 (1.0–2.2s): a cursor glides to `PLAY ONE ROUND` and depresses it once. The app's run-state line remains readable. In the right gutter, `SOURCE: QOLLAB · BACKEND JOBS=1` appears as the run contract.
+Scene 2 (1.0–2.2s): a single amber press ring closes around `PLAY ONE ROUND`. The app's post-round status remains readable. In the right gutter, `SOURCE: QOLLAB · BACKEND JOBS=1` appears as the run contract.
 
-Scene 3 (2.2–4.0s): `ONE ROUND. ONE OUTCOME.` lands in the gutter, followed by `BENCHMARKS ARE CACHED.` The frame holds on the one-job budget; no invented sampled outcome is shown.
+Scene 3 (2.2–4.0s): `ONE ROUND. ONE OUTCOME.` lands in the gutter. A clear disclosure reads `STATIC UI PREVIEW · NO BACKEND JOB SENT FOR THIS FILM`; no sampled result is invented or implied to have been collected for the video.
 
 ## Frame 3 — The reversal
 
@@ -135,18 +135,18 @@ Scene 3 (2.4–5.0s): `EVEN AN OPTIMAL DETECTOR IS BOUNDED HERE.` settles below 
 - status: animated
 - poster: 3s
 - blueprint: titlecard-reveal (Adapt)
-- asset_candidates: assets/trap-benchmark.png — source identity and evidence context
-- focal: assets/trap-benchmark.png
-- roles: assets/trap-benchmark.png = supporting
+- asset_candidates: assets/trap-expert.png — the source app's open expert drawer populated from registry metadata; assets/trap-benchmark.png — source identity and evidence context
+- focal: assets/trap-expert.png
+- roles: assets/trap-expert.png = cutout; assets/trap-benchmark.png = supporting
 
 Keep the evidence statement concrete: the project reproduces a cited result, separates analytic values from the theoretical ceiling, quarantines unsafe claims, and tests that boundary. No discovery or hardware-advantage claim.
 
-Scene 1 (0.0–1.3s): three evidence tags appear in order: `ANALYTIC`, `EMPIRICAL`, `THEORETICAL_CEILING`. Then `LIEN & QUINTINO (2026) · REPRODUCED, NOT CLAIMED AS NEW` and `CLAIM QUARANTINE · REGRESSION TESTS` resolve beneath them.
+Scene 1 (0.0–0.9s): show the real `ui/expert.js` drawer renderer populated from the registered HURTS pair payload. The source-derived crop includes overlap, strategy values, the Helstrom ceiling, and the citation. It shows science metadata only; no empirical run metadata is presented.
 
-Scene 2 (1.3–2.5s): two short lines land: `NO NEW THEOREM.` and `NO QUANTUM COMPUTATIONAL ADVANTAGE CLAIM.` Smaller supporting line: `SMALL INSTANCES ARE CLASSICALLY SIMULABLE.`
+Scene 2 (0.9–2.5s): the evidence tags `ANALYTIC`, `EMPIRICAL`, and `THEORETICAL_CEILING` take the upper rail. The reproduced citation and the limits `NO NEW THEOREM`, `NO QUANTUM COMPUTATIONAL ADVANTAGE CLAIM`, and `SMALL INSTANCES ARE CLASSICALLY SIMULABLE` resolve below. The regression-test line names `test_bridge_contract.py` and `test_visual_metrics.py`, which reject quarantined claims.
 
-Scene 3 (2.5–4.0s): clean cut to the branded lockup: `ENTANGLEMENT TRAP`, `Two particles. One shared story.` is omitted because it belongs to the sibling teaching toy; show `Asterisk-Hunter/entanglement` and the direct repository URL `https://github.com/Asterisk-Hunter/entanglement` in a dedicated, high-contrast link rail. The final 1.5 seconds are an active lockup reveal and held URL, not a frozen screenshot. A local app run command is omitted until one exists at the repository root.
+Scene 3 (2.5–4.0s): clean cut to the branded lockup: `ENTANGLEMENT TRAP`; show `Asterisk-Hunter/entanglement` and the direct repository URL `https://github.com/Asterisk-Hunter/entanglement` in a dedicated, high-contrast link rail. The final 1.5 seconds are an active lockup reveal and held URL, not a frozen screenshot. A local app run command is omitted until one exists at the repository root.
 
 ## Video direction
 
-Silent 16:9, 1920×1080. Use only `#0b0e14`, `#e9b44c`, `#f2f0ff`, and readable muted text from the app palette. Every screenshot is a tight crop from Entanglement Trap's root HTML/CSS and every number comes from the supplied safe claims. Use platform monospace fonts so there is no missing web-font dependency. Main copy is at least 28px at output size; primary values and the hook are larger. Use one reveal at a time, long-tail deceleration, and still holds for reading. Never place motion copy over app copy. Do not include the sibling `entangle-lab/`, a fabricated empirical result, a four-Pauli advantage, or the quarantined unsafe numeric value. Use hard cuts between beats and matched-direction motion only for the mechanism-to-sweep handoff. Keep the final lockup active through the end of the 26-second cut.
+Silent 16:9, 1920×1080. Use only `#0b0e14`, `#e9b44c`, `#f2f0ff`, and readable muted text from the app palette. Every screenshot is a tight crop from Entanglement Trap's root HTML/CSS and every number comes from the supplied safe claims or the live gallery renderer. Use bundled JetBrains Mono. Main copy is at least 28px at output size; primary values and the hook are larger. Use one reveal at a time, long-tail deceleration, and still holds for reading. Never place motion copy over app copy. Do not include the sibling `entangle-lab/`, a fabricated empirical result, a four-Pauli advantage, or the quarantined unsafe numeric value. Use hard cuts between beats and matched-direction motion only for the mechanism-to-sweep handoff. Keep the final lockup active through the end of the 26-second cut.

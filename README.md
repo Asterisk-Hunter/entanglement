@@ -1,6 +1,6 @@
 # Entanglement Trap
 
-**Entanglement is a resource, not a guarantee.** This repository contains two complementary learning experiences. Entanglement Trap is the Qollab hackathon submission: a Qiskit channel-discrimination game with three carefully labeled results—entanglement hurts, helps, or ties. Entangle Lab is the no-backend teaching on-ramp: a browser-based singlet and CHSH playground that lets learners explore quantum correlations first.
+**Entanglement is a resource, not a guarantee.** This repository contains two complementary learning experiences. Entanglement Trap is the submission for the [Qollab hackathon](https://qollab.xyz/programs/hackathon): a Qiskit channel-discrimination game with three carefully labeled results—entanglement hurts, helps, or ties. Entangle Lab is the no-backend teaching on-ramp: a browser-based singlet and CHSH playground that lets learners explore quantum correlations first.
 
 ## Two experiences, one learning path
 
@@ -13,6 +13,10 @@
 | **Role in the submission** | The project judges should evaluate. | An optional conceptual on-ramp for judges and learners who want to play before studying channel discrimination. |
 
 These experiences answer different questions. Entangle Lab introduces quantum correlations; Entanglement Trap tests a resource assumption in channel discrimination. The Trap is the submitted work. The Lab supports the learning path and is not presented as the core hackathon result.
+
+## Review the submission
+
+For a quick review, watch the [26-second Entanglement Trap video](videos/entanglement-trap/renders/video.mp4), inspect the [claim ledger](claims.json), then follow the [field guide](docs/src/SUMMARY.md) from the question through the results, evidence, and limitations. The code map and local validation commands are below.
 
 For the HURTS pair at `d = 256`, the maximally entangled outputs have signed overlap `−0.9921875`. The implemented measurement gives `0.507781982421875`; even the optimal Helstrom measurement for that probe is capped at `0.5623778102448098`. The code keeps that ceiling distinct from the executable strategy value.
 
@@ -57,7 +61,7 @@ The detailed evidence and scope are recorded in [`claims.json`](claims.json) and
 
 ## Reproduce the local checks
 
-Use Python 3.12 and the pinned development dependencies. From the repository root:
+Use Python 3.12.14 and the pinned development dependencies. From the repository root:
 
 ```sh
 python3.12 -m venv .venv
@@ -67,7 +71,7 @@ python -m pip install -r requirements-dev.txt
 python -m pytest -q
 ```
 
-The complete suite checks the analytic fixtures, channel circuits, gallery schema, extension contract, and Qollab bridge behavior using local test backends. One test for the actual Qollab browser runtime is intentionally skipped because that external runtime is not available in a local test run.
+The complete suite checks the analytic fixtures, channel circuits, gallery schema, extension contract, and Qollab bridge behavior using local test backends. `requirements-dev.txt` pins every Python dependency. One test for the actual Qollab browser runtime is intentionally skipped because that external runtime is not available in a local test run.
 
 To inspect the deterministic reference values without running a backend:
 
@@ -84,8 +88,6 @@ PY
 To check one flagship batch locally, run the engine tests; they use Qiskit Aer and are included in the full suite. No hardware is required for the local checks. A live Qollab run requires the project to be published in Qollab with its selected backend injected by the platform.
 
 ## Read the docs
-
-Watch the [26-second Entanglement Trap video](videos/entanglement-trap/renders/video.mp4) for the core result, its provenance labels, and the limits of the claim.
 
 The [Entanglement Trap field guide](docs/src/SUMMARY.md) covers channel discrimination, the three results, evidence labels, limitations, and the extension interface. The [Entangle Lab field guide](entangle-lab/docs/src/SUMMARY.md) introduces qubits, singlets, measurement, and the CHSH test in nine chapters.
 

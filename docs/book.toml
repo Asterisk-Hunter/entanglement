@@ -8,7 +8,7 @@ language = "en"
 [output.html]
 default-theme = "coal"
 preferred-dark-theme = "coal"
-additional-css = ["theme/catppuccin.css"]
+additional-css = ["theme/entanglement-trap.css"]
 mathjax-support = true
 smart-punctuation = false
 git-repository-url = "https://github.com/Asterisk-Hunter/entanglement"

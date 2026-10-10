@@ -14,6 +14,19 @@ The flagship compares `I` and `V = 2|0…0⟩⟨0…0| − I` at dimension `d = 
 
 The main UI can also estimate benchmark rates from sampled results on the Qollab-selected backend. Those rates are empirical and must be read with the displayed dimension, shot count, backend, and confidence interval. Analytic values are not replaced by the sampled rate.
 
+### Dimension sweep
+
+The flagship formulas give this dimension sweep for the implemented strategies:
+
+| Dimension | Separable success | Maximally entangled success | Evidence |
+| ---: | ---: | ---: | --- |
+| `4` | `1.0` | `0.875` | `ANALYTIC` |
+| `16` | `1.0` | `0.6171875` | `ANALYTIC` |
+| `64` | `1.0` | `0.53076171875` | `ANALYTIC` |
+| `256` | `1.0` | `0.507781982421875` | `ANALYTIC` |
+
+These are formula-derived reference values, not rates measured by a backend run. The sweep illustrates the trend; it does not imply that entanglement generally hurts discrimination.
+
 ## HELPS: Identity vs. full depolarization
 
 For one qubit, the second channel replaces its input with the maximally mixed state. The code derives success from the trace norm of the output-state difference.

@@ -20,7 +20,7 @@ python -m pip install -r requirements-dev.txt
 python -m pytest -q
 ```
 
-The pinned requirements make the local test environment reproducible. The suite checks science fixtures, Qiskit circuits, exact-statevector results, batch parsing, payload contracts, and the extension interface. The test `test_actual_qollab_browser_runtime_executes_the_batch` is skipped because local tests cannot provide Qollab's browser runtime or its injected backend.
+The pinned requirements make the local test environment reproducible; this suite was verified with Python `3.12.14`. It checks science fixtures, Qiskit circuits, exact-statevector results, batch parsing, payload contracts, and the extension interface. The test `test_actual_qollab_browser_runtime_executes_the_batch` is skipped because local tests cannot provide Qollab's browser runtime or its injected backend.
 
 To print the registered pairs and their analytic bounds:
 
@@ -35,6 +35,8 @@ PY
 ```
 
 This command reads formulas from the local implementation. It does not submit a job or produce hardware evidence.
+
+For the flagship pair, the deterministic values include overlap `-0.9921875`, separable success `1.0`, maximally entangled success `0.507781982421875`, and a Helstrom ceiling of `0.5623778102448098`. Their meanings and provenance are explained in [the results chapter](results.md).
 
 ## Build this book
 

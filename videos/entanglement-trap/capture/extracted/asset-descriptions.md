@@ -8,4 +8,5 @@ No remote app screenshots were captured because the guessed public Qollab projec
 - `trap-mechanism.png` — overlap and maximal-entanglement mechanism panel.
 - `trap-sweep.png` — the repository's `ui/sweep.js` figure, captured in a tight crop.
 - `trap-floor.png` — a source-claim card showing the exact Helstrom ceiling with its theoretical label.
+- `trap-expert.png` — the root app's `ui/expert.js` drawer renderer populated from the registered HURTS pair payload; it displays analytic strategy values, the theoretical ceiling, and the source citation. Backend-run fields are omitted because no live Qollab run was used for the film.
 - `trap-hull.png` — omitted to protect the six-beat timing and keep the claims legible.
