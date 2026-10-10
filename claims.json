@@ -1,0 +1,220 @@
+{
+  "schema_version": 1,
+  "product": "Entanglement Trap",
+  "tagline": "MORE ENTANGLEMENT MADE YOU WORSE.",
+  "novelty_note": "This project reproduces and operationalizes a verified result by Lien & Quintino (2026). It claims no discovery of the underlying theorem and no quantum computational advantage.",
+  "kinds": [
+    "EMPIRICAL",
+    "ANALYTIC",
+    "THEORETICAL_CEILING"
+  ],
+  "claims": [
+    {
+      "id": "flagship_overlap_maxent_d256",
+      "kind": "ANALYTIC",
+      "value": -0.9921875,
+      "unit": "overlap",
+      "dimension": 256,
+      "formula": "overlap(d) = (2 - d) / d",
+      "source": "design spec, 'Human-verified science'",
+      "reproduced": true,
+      "safe_for_demo": true,
+      "notes": "Overlap of the two channel outputs for the maximally entangled probe."
+    },
+    {
+      "id": "flagship_simple_maxent_d256_formula",
+      "kind": "ANALYTIC",
+      "value": 0.507781982421875,
+      "unit": "success_probability",
+      "dimension": 256,
+      "formula": "p_simple(d) = 1 - overlap(d)^2 / 2",
+      "source": "design spec, 'Human-verified science' (formula evaluated at d = 256)",
+      "reproduced": true,
+      "safe_for_demo": true,
+      "notes": "Value returned by quantum.science.simple_success(256)."
+    },
+    {
+      "id": "flagship_simple_maxent_d256_printed",
+      "kind": "ANALYTIC",
+      "value": 0.5078125,
+      "unit": "success_probability",
+      "dimension": 256,
+      "formula": "printed figure in the design spec; inconsistent with p_simple(d) = 1 - overlap(d)^2 / 2 by 3.0517578125e-05",
+      "source": "design spec, 'Human-verified science' (printed value)",
+      "reproduced": false,
+      "safe_for_demo": false,
+      "notes": "Historical note: the design spec prints 0.5078125 but its own formula gives 0.507781982421875. Preserved verbatim for the record; the formula value is authoritative and this entry must not be shown as an analytic value."
+    },
+    {
+      "id": "flagship_helstrom_maxent_d256",
+      "kind": "THEORETICAL_CEILING",
+      "value": 0.5623778102448098,
+      "unit": "success_probability",
+      "dimension": 256,
+      "formula": "p_helstrom(d) = 1/2 * (1 + sqrt(1 - overlap(d)^2))",
+      "source": "design spec, 'Human-verified science' (formula evaluated at d = 256)",
+      "reproduced": true,
+      "safe_for_demo": true,
+      "notes": "Value returned by quantum.science.helstrom_ceiling(256); spec prints ~0.562378286, consistent to the printed precision."
+    },
+    {
+      "id": "flagship_separable_d256",
+      "kind": "ANALYTIC",
+      "value": 1.0,
+      "unit": "success_probability",
+      "dimension": 256,
+      "formula": "separable two-basis-state strategy succeeds with certainty",
+      "source": "design spec, 'Human-verified science'",
+      "reproduced": true,
+      "safe_for_demo": true,
+      "notes": "quantum.science.SEPARABLE_SUCCESS."
+    },
+    {
+      "id": "flagship_overlap_d4",
+      "kind": "ANALYTIC",
+      "value": -0.5,
+      "unit": "overlap",
+      "dimension": 4,
+      "formula": "overlap(d) = (2 - d) / d",
+      "source": "design spec formula, golden fixture",
+      "reproduced": true,
+      "safe_for_demo": true
+    },
+    {
+      "id": "flagship_simple_d4",
+      "kind": "ANALYTIC",
+      "value": 0.875,
+      "unit": "success_probability",
+      "dimension": 4,
+      "formula": "p_simple(d) = 1 - overlap(d)^2 / 2",
+      "source": "design spec formula, golden fixture",
+      "reproduced": true,
+      "safe_for_demo": true
+    },
+    {
+      "id": "flagship_helstrom_d4",
+      "kind": "THEORETICAL_CEILING",
+      "value": 0.9330127018922193,
+      "unit": "success_probability",
+      "dimension": 4,
+      "formula": "p_helstrom(d) = 1/2 * (1 + sqrt(1 - overlap(d)^2))",
+      "source": "design spec formula, golden fixture",
+      "reproduced": true,
+      "safe_for_demo": true
+    },
+    {
+      "id": "flagship_overlap_d16",
+      "kind": "ANALYTIC",
+      "value": -0.875,
+      "unit": "overlap",
+      "dimension": 16,
+      "formula": "overlap(d) = (2 - d) / d",
+      "source": "design spec formula, golden fixture",
+      "reproduced": true,
+      "safe_for_demo": true
+    },
+    {
+      "id": "flagship_simple_d16",
+      "kind": "ANALYTIC",
+      "value": 0.6171875,
+      "unit": "success_probability",
+      "dimension": 16,
+      "formula": "p_simple(d) = 1 - overlap(d)^2 / 2",
+      "source": "design spec formula, golden fixture",
+      "reproduced": true,
+      "safe_for_demo": true
+    },
+    {
+      "id": "flagship_helstrom_d16",
+      "kind": "THEORETICAL_CEILING",
+      "value": 0.7420614591379635,
+      "unit": "success_probability",
+      "dimension": 16,
+      "formula": "p_helstrom(d) = 1/2 * (1 + sqrt(1 - overlap(d)^2))",
+      "source": "design spec formula, golden fixture",
+      "reproduced": true,
+      "safe_for_demo": true
+    },
+    {
+      "id": "flagship_overlap_d64",
+      "kind": "ANALYTIC",
+      "value": -0.96875,
+      "unit": "overlap",
+      "dimension": 64,
+      "formula": "overlap(d) = (2 - d) / d",
+      "source": "design spec formula, golden fixture",
+      "reproduced": true,
+      "safe_for_demo": true
+    },
+    {
+      "id": "flagship_simple_d64",
+      "kind": "ANALYTIC",
+      "value": 0.53076171875,
+      "unit": "success_probability",
+      "dimension": 64,
+      "formula": "p_simple(d) = 1 - overlap(d)^2 / 2",
+      "source": "design spec formula, golden fixture",
+      "reproduced": true,
+      "safe_for_demo": true
+    },
+    {
+      "id": "flagship_helstrom_d64",
+      "kind": "THEORETICAL_CEILING",
+      "value": 0.6240195927061527,
+      "unit": "success_probability",
+      "dimension": 64,
+      "formula": "p_helstrom(d) = 1/2 * (1 + sqrt(1 - overlap(d)^2))",
+      "source": "design spec formula, golden fixture",
+      "reproduced": true,
+      "safe_for_demo": true
+    },
+    {
+      "id": "four_pauli_star_theta_pi_8",
+      "kind": "ANALYTIC",
+      "value": 0.8535533905932737,
+      "unit": "success_probability",
+      "dimension": 2,
+      "formula": "p_star(theta) = 1/2 * (1 + sin(2 * theta)), evaluated at theta = pi/8",
+      "source": "local trace-norm derivation on the two channel outputs of the superdense-coding pair R_P(+-2 theta), independently recomputed in tests/test_four_pauli.py",
+      "reproduced": true,
+      "safe_for_demo": true,
+      "notes": "Attained exactly by the executable Bell-measurement discriminator in channels/four_pauli.py: a Pauli-frame correction on the reference qubit followed by a Bell readout, verified by exact statevector simulation. Labeled ANALYTIC rather than THEORETICAL_CEILING only because that attaining circuit exists and is tested; the value is not a measurement on hardware."
+    },
+    {
+      "id": "four_pauli_separable_optimum_theta_pi_8",
+      "kind": "ANALYTIC",
+      "value": 0.8535533905932737,
+      "unit": "success_probability",
+      "dimension": 2,
+      "formula": "p_star(theta) = 1/2 * (1 + sin(2 * theta)), evaluated at theta = pi/8",
+      "source": "local trace-norm derivation for the separable output states, independently evaluated by an executable |+> input and Y-basis readout in tests/test_four_pauli.py",
+      "reproduced": true,
+      "safe_for_demo": true,
+      "notes": "The optimal separable strategy matches the maximally entangled Bell strategy for this unitary pair. The restricted Bell readout with a product probe scores 0.5, but that is not an optimal separable comparison."
+    },
+    {
+      "id": "helps_depolarizing_separable_d2",
+      "kind": "ANALYTIC",
+      "value": 0.75,
+      "unit": "success_probability",
+      "dimension": 2,
+      "formula": "1/2 + 1/4 * ||rho_I - rho_D||_1 for the declared |0> probe",
+      "source": "local trace-norm derivation in channels/helps_identity_depolarizing.py",
+      "reproduced": true,
+      "safe_for_demo": true,
+      "notes": "Identity versus the fully depolarizing qubit channel; analytic probe comparison, not a live Qollab measurement."
+    },
+    {
+      "id": "helps_depolarizing_max_entangled_d2",
+      "kind": "THEORETICAL_CEILING",
+      "value": 0.875,
+      "unit": "success_probability",
+      "dimension": 2,
+      "formula": "1/2 + 1/4 * ||rho_I - rho_D||_1 for a Bell probe",
+      "source": "local trace-norm derivation in channels/helps_identity_depolarizing.py",
+      "reproduced": true,
+      "safe_for_demo": true,
+      "notes": "The optimal Bell-probe value is a theoretical ceiling; the corresponding live Qollab measurement path is not implemented or validated."
+    }
+  ]
+}
