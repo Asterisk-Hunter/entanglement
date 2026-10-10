@@ -1,6 +1,6 @@
-# How to add a channel pair
+# Add a channel pair in about 20 minutes
 
-The gallery uses a shared `ChannelPair` interface. A new implementation can provide the science metadata and channel circuits without changing the generic payload formatter. The present interface test creates a synthetic third pair and verifies that serialization and circuit construction use the shared helpers.
+The gallery uses a shared `ChannelPair` interface. If you already have a defined pair and verified formulas, wiring it into the gallery is designed to take about 20 minutes. Deriving and validating a new scientific result takes additional work. A new implementation can provide the science metadata and channel circuits without changing the generic payload formatter. The present interface test creates a synthetic third pair and verifies that serialization and circuit construction use the shared helpers.
 
 ## 1. Implement the pair
 

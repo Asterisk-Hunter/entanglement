@@ -22,9 +22,9 @@ For each channel pair, how well can we distinguish the channels with a separable
 
 The point is not that entanglement is harmful. Its effect depends on the channel pair and on the discrimination strategy. The gallery makes those comparisons inspectable instead of presenting one surprising number without context.
 
-## Add an experiment
+## Add an experiment in about 20 minutes
 
-The channel-pair interface is deliberately small. A minimal pair implements `build_a`, `build_b`, `strategies`, and `analytic_bounds`; the registry then makes its metadata available to the shared gallery and payload formatter. A synthetic third-pair contract test checks that the common consumer accepts a new pair without pair-specific branching.
+The channel-pair interface is deliberately small. If you already have a defined pair and verified formulas, wiring it into the gallery is designed to take about 20 minutes. Deriving and validating a new scientific result takes additional work. A minimal pair implements `build_a`, `build_b`, `strategies`, and `analytic_bounds`; the registry then makes its metadata available to the shared gallery and payload formatter. A synthetic third-pair contract test checks that the common consumer accepts a new pair without pair-specific branching.
 
 1. Copy [`channels/four_pauli.py`](channels/four_pauli.py) as a worked example, then create `channels/my_pair.py`. Implement the four methods above and give the pair a unique `slug`, `name`, `citation`, and reference `dimension`.
 2. Add one registry entry in [`channels/api.py`](channels/api.py), mapping your slug to the new module, exported pair instance, and gallery role. Add claim records to [`claims.json`](claims.json) for every displayed number and reference their IDs from each `Strategy`.
