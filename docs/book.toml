@@ -1,0 +1,14 @@
+[book]
+title = "Entangle Lab Field Guide"
+authors = ["Entangle Lab contributors"]
+description = "A gentle, interactive guide to quantum entanglement and the CHSH Bell test."
+src = "src"
+language = "en"
+
+[output.html]
+default-theme = "coal"
+preferred-dark-theme = "coal"
+additional-css = ["theme/catppuccin.css"]
+mathjax-support = true
+smart-punctuation = false
+git-repository-url = "https://github.com/Asterisk-Hunter/entanglement"
