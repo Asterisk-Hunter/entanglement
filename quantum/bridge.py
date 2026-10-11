@@ -188,6 +188,7 @@ def get_experience(
         )
 
     round_payload = _as_qollab_live(round_result.to_payload())
+    round_payload["probe_kind"] = probe_kind
     round_payload["sampled_from_shared_batch"] = True
     round_payload["round_selection_seed"] = rng_seed
 

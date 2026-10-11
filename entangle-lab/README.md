@@ -27,7 +27,7 @@ Open <http://localhost:8000/entangle-lab/>. You can also open this directory's `
 The nine-chapter [mdBook field guide](docs/src/SUMMARY.md) introduces the qubit, singlet, measurement probabilities, CHSH inequality, simulator, and model limits.
 
 ```sh
-cd docs
+cd entangle-lab/docs
 mdbook build
 mdbook serve --open
 ```

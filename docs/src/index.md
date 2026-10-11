@@ -33,7 +33,7 @@ The book follows the same path as the project: start with the question, run the 
 
 The project reproduces and operationalizes prior channel-discrimination results. It does not claim a new theorem or quantum computational advantage. Small instances are classically simulable. The displayed strategy values are analytic, theoretical ceilings, or empirical measurements only where the interface labels them as such.
 
-The machine-readable [claim ledger](../../claims.json) records formulas, values, dimensions, and whether each claim is safe to display. The code and tests are the executable source of the implementation details.
+The machine-readable [claim ledger](https://github.com/Asterisk-Hunter/entanglement/blob/main/claims.json) records formulas, values, dimensions, and whether each claim is safe to display. The code and tests are the executable source of the implementation details.
 
 ## A companion learning path
 

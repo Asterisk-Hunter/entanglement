@@ -20,4 +20,4 @@ The field guide introduces the pieces in order. You can read it without a physic
 
 The simulator samples the quantum probability distribution for an ideal two-spin singlet. It does not generate physical particles or prove a theorem from experimental data. The [model limits](limits.md) chapter explains what those distinctions mean.
 
-This field guide covers the singlet and Bell-test teaching playground. The repository's companion [Entanglement Trap project](../../README.md) takes the next step into quantum channel discrimination; it has a separate [field guide](../../docs/src/SUMMARY.md).
+This field guide covers the singlet and Bell-test teaching playground. The [Entanglement Trap project](https://github.com/Asterisk-Hunter/entanglement/blob/main/README.md) takes the next step into quantum channel discrimination; it has a separate [field guide](https://github.com/Asterisk-Hunter/entanglement/blob/main/docs/src/SUMMARY.md). Entangle Lab is a local companion and is not included in the published Qollab experiment.

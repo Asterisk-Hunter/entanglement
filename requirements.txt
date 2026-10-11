@@ -2,8 +2,7 @@
 # This file must stay installable where numpy/scipy are prebuilt and native
 # wheels (qiskit, qiskit-aer, psutil, ...) are unavailable: floor pins only,
 # no == pins, no native packages. The full frozen desktop test environment
-# lives in requirements-desktop.txt.
-# Only quantum/science.py and quantum/results.py import without qiskit;
-# engine/bridge/channels need the desktop environment.
+# lives in requirements-dev.txt.
+# Qollab supplies Qiskit; local engine/bridge development uses that pinned set.
 numpy>=2.2.6
 scipy>=1.15.3

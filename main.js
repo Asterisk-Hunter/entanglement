@@ -188,8 +188,7 @@ function renderSelectedBenchmark() {
     "SOURCE " + experience.source_label +
     " | backend=" + experience.backend +
     " | d=" + experience.dimension +
-    " | backend jobs=" + experience.total_backend_jobs +
-    " | smoke: " + backendProbe().text;
+    " | backend jobs=" + experience.total_backend_jobs;
 
   nodes.compareSeparable.disabled = selectedProbe() === PROBE_KINDS.SEPARABLE;
 }
@@ -277,7 +276,7 @@ document.getElementById("round-form").addEventListener("submit", function (event
     shots +
     " SHOTS / CHANNEL";
   nodes.provenance.textContent =
-    "SOURCE: NOT RUN | PROVENANCE: NOT RUN | SMOKE: " + probe.text;
+    "SOURCE: NOT RUN | BACKEND: " + backendProbe().text;
   nodes.run.disabled = true;
   nodes.trials.disabled = true;
   nodes.dimension.disabled = true;
@@ -306,8 +305,7 @@ document.getElementById("round-form").addEventListener("submit", function (event
         "SOURCE " + result.source_label +
         " | backend=" + result.backend +
         " | d=" + result.dimension +
-        " | backend jobs=" + result.total_backend_jobs +
-        " | smoke: " + probe.text;
+        " | backend jobs=" + result.total_backend_jobs;
       if (selectedPair) expert.update(selectedPair, experience);
     })
     .catch(reportBridgeFailure)

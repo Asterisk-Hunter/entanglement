@@ -22,4 +22,4 @@ The HELPS and Four-Pauli implementations also include their derivation and limit
 
 ## Claim ledger
 
-[`claims.json`](../../claims.json) is the structured source for numeric claims. It distinguishes reproducible values from a historical printed value retained for audit. The historical HURTS value `0.5078125` is marked unsafe for display; the formula gives `0.507781982421875`, which is the value used in the interface.
+[`claims.json`](https://github.com/Asterisk-Hunter/entanglement/blob/main/claims.json) is the structured source for numeric claims. It distinguishes reproducible values from a historical printed value retained for audit. The historical HURTS value `0.5078125` is marked unsafe for display; the formula gives `0.507781982421875`, which is the value used in the interface.

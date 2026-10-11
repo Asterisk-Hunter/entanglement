@@ -1,6 +1,6 @@
-# Add a channel pair in about 20 minutes
+# Add a channel pair
 
-The gallery uses a shared `ChannelPair` interface. If you already have a defined pair and verified formulas, wiring it into the gallery is designed to take about 20 minutes. Deriving and validating a new scientific result takes additional work. A new implementation can provide the science metadata and channel circuits without changing the generic payload formatter. The present interface test creates a synthetic third pair and verifies that serialization and circuit construction use the shared helpers.
+The gallery uses a shared `ChannelPair` interface. Start with a defined pair and verified formulas, then provide its science metadata and channel circuits through the generic payload formatter. Deriving and validating a new scientific result is separate work. The present interface test creates a synthetic third pair and verifies that serialization and circuit construction use the shared helpers.
 
 ## 1. Implement the pair
 
@@ -45,7 +45,7 @@ Run:
 python -m pytest -q
 ```
 
-The existing `test_synthetic_pair_needs_no_loader_consumer_change` proves only the shared interface and generic payload path. It does not prove a new pair is in the registry, rendered in the browser, or executable on a selected backend. The extension process is designed to be a short code change, but the time required depends on the experiment and its verification; no fixed completion time is guaranteed.
+The existing `test_synthetic_pair_needs_no_loader_consumer_change` proves only the shared interface and generic payload path. It does not prove a new pair is in the registry, rendered in the browser, or executable on a selected backend.
 
 ## Live execution is a separate step
 
