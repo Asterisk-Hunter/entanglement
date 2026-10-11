@@ -2,6 +2,8 @@
 
 ## Use the published Qollab project
 
+[Open Entanglement Trap](https://qollab.xyz/p/01a1299b-dba2-772e-a6e7-8012098938f0) or [watch the 2:30 demo](https://drive.google.com/file/d/1AtWwNPAnjLCQPXdTPFlGnzqjLQ9pgD2w/view?usp=sharing). For a first experiment, use a simulator with dimension **16** and **100 shots per channel**. That produces 200 trials per probe across the two channels.
+
 Open the published Entanglement Trap project on Qollab, choose an available backend, and start a project Run. Select a probe, dimension, and shot count, then choose **Play one round**. The project submits one four-circuit batch for the flagship Identity-vs-`V` pair. The batch supports the displayed round and both strategy benchmarks; revealing or comparing results reuses the returned evidence and does not submit another job.
 
 Wait for **READY** before choosing **Play one round**. Qollab keeps its outer Run active while you choose a probe; no quantum job is sent until you click. The outer Run completes after the batch finishes, and the cached comparison and charts remain interactive. If the QPU confirmation is covered by Qollab's cookie notice, dismiss that notice first.

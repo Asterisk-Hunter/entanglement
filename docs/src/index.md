@@ -2,6 +2,8 @@
 
 Entanglement Trap is an interactive laboratory for one question in quantum information: **when does entanglement change how well two quantum channels can be distinguished?**
 
+[Open the Qollab experiment](https://qollab.xyz/p/01a1299b-dba2-772e-a6e7-8012098938f0) · [Watch the 2:30 demo](https://drive.google.com/file/d/1AtWwNPAnjLCQPXdTPFlGnzqjLQ9pgD2w/view?usp=sharing)
+
 The lab compares a separable probe with a maximally entangled probe across three channel pairs. The results are deliberately not reduced to one slogan:
 
 | Verdict | Comparison | Result |
@@ -35,4 +37,6 @@ The machine-readable [claim ledger](../../claims.json) records formulas, values,
 
 ## A companion learning path
 
-[Entangle Lab](../../entangle-lab/index.html) is the zero-backend on-ramp in this repository. Its singlet playground lets you change Alice's and Bob's measurement angles, sample one correlated outcome, and estimate the CHSH statistic from finite samples. Its [nine-chapter field guide](../../entangle-lab/docs/src/SUMMARY.md) builds the intuition used here. The Lab teaches quantum correlations; this book and the Qollab submission focus on channel discrimination.
+Entangle Lab is the zero-backend companion in the full repository under `entangle-lab/`. Its singlet playground lets you change Alice's and Bob's measurement angles, sample one correlated outcome, and estimate the CHSH statistic from finite samples. Its [field guide](https://github.com/Asterisk-Hunter/entanglement/blob/main/entangle-lab/docs/src/SUMMARY.md) builds the intuition used here. The companion runs locally and is not included in the published Qollab project. It is distinct from the **Resource Lab** channel gallery within Entanglement Trap.
+
+To use the companion, serve the full repository with `python -m http.server 8000` and open `http://localhost:8000/entangle-lab/`. The companion teaches quantum correlations; this book and the Qollab submission focus on channel discrimination.

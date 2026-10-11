@@ -8,20 +8,9 @@
 
 ## The question behind the experiment
 
-In channel discrimination, a referee chooses one of two transformations with equal probability. You prepare a quantum state, use the unknown transformation once, then measure the output to decide which transformation was applied.
+In channel discrimination, a referee chooses one of two transformations with equal probability. You prepare a probe, use the unknown transformation once, then measure the output to identify it. An entangled probe includes a reference register that stays outside the channel.
 
-A separable probe uses the system alone. An entangled probe shares a state with a reference register that stays outside the channel. That extra reference can help distinguish outputs—but the amount of entanglement alone does not determine success. The channel pair and the measurement matter too.
-
-Entanglement Trap turns that distinction into a learning sequence: **choose → run → compare → explain → inspect**. The flagship counterexample is supported by two contrasting examples, so visitors can investigate when the resource helps rather than leave with a blanket claim about entanglement.
-
-## Choose your learning path
-
-| Visitor | Start with | Go deeper |
-| --- | --- | --- |
-| **New to quantum computing** | Play one round and compare the two probes. | Read the channel-discrimination introduction; explore why similar outputs are harder to distinguish. |
-| **Student or educator** | Use the live comparison and dimension sweep. | Connect output overlap, measurement, and success probability through the field guide. |
-| **Technical reviewer** | Inspect the empirical labels, confidence intervals, and exact values. | Trace the channel circuits, analytic formulas, and claim records in the source. |
-| **Contributor** | Inspect the Resource Lab registry and worked channel-pair examples. | Add a pair, document its evidence, and implement a live measurement path when appropriate. |
+Entanglement Trap follows **choose → run → compare → explain → inspect**. A counterexample and two contrasting channel pairs show why success depends on the probe and measurement, as well as the amount of entanglement.
 
 ## Try it
 
@@ -40,18 +29,6 @@ The displayed round is sampled from the measured batch. A single win or loss doe
 - **Evidence:** source labels, confidence intervals, exact values, and a `claims.json` ledger connecting the displayed quantities to their formulas and references.
 
 **Resource Lab is the gallery within this project.** The separate **Entangle Lab** singlet/CHSH companion in the full repository is a local browser app; it is not included in the published Qollab project.
-
-### Two experiences in the full repository
-
-| | Entanglement Trap | Entangle Lab companion |
-| --- | --- | --- |
-| **Question** | How does the probe affect channel discrimination? | How do measurement angles affect entangled-pair correlations? |
-| **Experience** | A channel-identification game, repeated trials, proof figures, and a comparison gallery. | Adjustable Alice/Bob analyzers, single-pair sampling, and finite-shot CHSH estimates. |
-| **Model** | Qiskit circuits through the Qollab-selected backend, plus labeled analytic references. | Ideal singlet probabilities calculated in JavaScript; no quantum backend. |
-| **Documentation** | Seven field-guide chapters covering the task, results, execution, architecture, extensions, and limits. | An introduction and eight chapters covering qubits, singlets, measurement, CHSH, implementation, and limits. |
-| **Availability** | The published Qollab submission. | The full repository under `entangle-lab/`; run locally using the instructions below. |
-
-The companion builds intuition about correlations. The submitted experiment examines distinguishability. They support the same learning journey while answering different questions.
 
 ## Read the results correctly
 
@@ -85,23 +62,7 @@ Optimal measurement for probe:  p_Helstrom(d) = (1 + √(1 − c(d)²)) / 2
 
 The separable strategy prepares a state whose two outputs are orthogonal, allowing perfect discrimination in the ideal model. Its success is not limited by the nearly identical outputs produced by the maximally entangled input.
 
-| Dimension | Separable strategy | Implemented entangled strategy |
-| ---: | ---: | ---: |
-| 4 | 100% | 87.50% |
-| 16 | 100% | 61.72% |
-| 64 | 100% | 53.08% |
-| 256 | 100% | 50.78% |
-
-These are analytic reference values, not backend measurements. Dimension 16 is a useful starting point for a live demonstration because its predicted contrast is visible without trying to resolve a tiny deviation from chance.
-
-### What each figure explains
-
-| Figure | What to look for | What it establishes |
-| --- | --- | --- |
-| **Output-state distinguishability** | Increasing similarity of the two maximally entangled outputs. | A resource can remain maximal while information useful for this decision decreases. |
-| **Dimension sweep** | The entangled strategy approaching 50%, while the separable strategy stays at 100%. | The trend across dimensions, with the implemented strategy separate from the optimal ceiling. |
-| **Eigenvalue geometry** | The reachable set and its nearest point to zero; drag an eigenvalue to explore. | A geometric explanation of how probe choice changes the output overlap. |
-| **Entropy / Helstrom map** | Success bounds across the displayed family of probe states. | Entanglement entropy alone does not specify discrimination performance. |
+At dimension 16, the implemented entangled strategy's analytic success is **61.72%**, compared with **100%** for the separable strategy. This contrast makes a useful first live demonstration. The dimension sweep shows the trend toward chance; the eigenvalue and entropy figures explain the probe dependence geometrically.
 
 ### Evidence you can audit
 
@@ -125,37 +86,13 @@ Small instances are classically simulable; no computational advantage is claimed
 
 ## Implementation
 
-The root `index.html` is a Qollab-injected HTML fragment. Qollab loads `main.js` and `main.css`, supplies the selected backend, and exposes the Python bridge.
+Qollab loads the HTML fragment, `main.js`, and `main.css`, and supplies the selected backend. `quantum/bridge.py` returns the shared run payload; `quantum/engine.py` compiles and executes the four-circuit batch. `quantum/science.py` provides formulas, `channels/` defines the pairs, and `ui/` renders the explanations.
 
-| Source | Role |
-| --- | --- |
-| `quantum/bridge.py` | Shared run payload, sampled round, benchmarks, and gallery metadata. |
-| `quantum/engine.py` | Four-circuit batch, portable gate compilation, execution, and count parsing. |
-| `quantum/science.py` | Analytic reference formulas. |
-| `channels/` | Channel definitions, strategy metadata, and registry. |
-| `ui/` | Interactive figures, results, and gallery. |
-
-### One batch, a complete comparison
-
-```text
-Choose a probe and run settings
-            ↓
-get_experience → build and compile four circuits
-            ↓
-one backend.run: sep_I · sep_V · me_I · me_V
-            ↓
-measured counts → sampled round + both benchmarks
-            ↓
-cached comparisons, explanations, and strategy details
-```
-
-The selected probe controls which counts supply the displayed round. Both probe benchmarks are calculated from the shared batch, so switching the comparison does not consume another backend job. Circuit compilation uses a portable `rx`, `ry`, `rz`, `cx` basis before execution. Gallery discovery stays separate and submits no job.
-
-The registry is broader than the current live engine: all three pairs have inspectable metadata, while the shared live runner is specific to Identity vs. `V`. This boundary is explicit in the bridge, UI labels, and documentation.
+The live runner is specific to Identity vs. `V`. The gallery registry supports all three pairs' metadata. The architecture chapter below explains this boundary and the one-job design.
 
 ## Field guide: from intuition to implementation
 
-The `docs/` folder contains a maintained mdBook with a dark theme matching the experiment and mathematical notation support. Its chapters are also available as Markdown in the public repository, so the documentation links below work outside the Qollab runtime.
+The seven-chapter mdBook develops the explanation from first principles through reproducible implementation. These public Markdown links work outside Qollab:
 
 | Chapter | What it helps you do |
 | --- | --- |
@@ -166,8 +103,6 @@ The `docs/` folder contains a maintained mdBook with a dark theme matching the e
 | [Add a channel pair](https://github.com/Asterisk-Hunter/entanglement/blob/main/docs/src/add-a-pair.md) | Implement the shared interface and document new claims. |
 | [Architecture and evidence](https://github.com/Asterisk-Hunter/entanglement/blob/main/docs/src/architecture.md) | Trace the one-job design, module responsibilities, and validation layers. |
 | [Limits and sources](https://github.com/Asterisk-Hunter/entanglement/blob/main/docs/src/limits-and-sources.md) | Check the research references, limitations, and historical-value audit. |
-
-The current Qollab bundle contains the runnable app and claim ledger, not the mdBook source or companion app. The public repository supplies those additional resources.
 
 ### Local development
 
@@ -192,32 +127,13 @@ python -m pytest -q
 
 On Windows, create the environment with `py -3.12 -m venv .venv` and activate it with `.venv\Scripts\Activate.ps1`.
 
-The local suite covers analytic formulas, circuits, result parsing, registry contracts, and the Python bridge. Its hosted-browser integration case is skipped locally because it requires Qollab's runtime. The field guide is in `docs/src/`; build it with `mdbook build` from `docs/`.
+The local suite covers analytic formulas, circuits, result parsing, registry contracts, and the Python bridge. Its hosted-browser integration case is skipped locally because it requires Qollab's runtime.
 
-To inspect the registered analytic values without submitting a backend job:
-
-```sh
-python -c "from channels.api import available_pairs, load_pair; [print(load_pair(s).name, load_pair(s).analytic_bounds()) for s in available_pairs()]"
-```
-
-To build and read the field guide locally:
-
-```sh
-cd docs
-mdbook build
-mdbook serve --open
-```
-
-Generated pages go to `docs/book/` and are ignored by Git. The maintained sources are in `docs/src/`, navigation is in `SUMMARY.md`, and book settings are in `book.toml`. The companion has its own guide under `entangle-lab/docs/`.
+To read the book locally, run `mdbook serve --open` from `docs/`. Maintained sources live in `docs/src/`; generated pages go to `docs/book/`. The companion has its own guide under `entangle-lab/docs/`.
 
 ### Extend the laboratory
 
-1. Use `channels/four_pauli.py` as a worked example. Define a unique slug, name, citation, reference dimension, channel circuits, and strategy records.
-2. Register the pair in `channels/api.py`. Add formula, value, dimension, source, and evidence records to `claims.json`; connect their IDs to the displayed strategies.
-3. Check the formulas, circuits, serialization, and labels. If claiming an implemented measurement attains an optimum, include an independent matrix or statevector comparison.
-4. For live execution, implement and validate the probe preparation, measurement, result parsing, and bridge/UI path. Keep a metadata-only entry labeled accordingly until that work exists.
-
-New pairs implement `build_a`, `build_b`, `strategies`, and `analytic_bounds`, then register in `channels/api.py`. Gallery metadata alone does not create a live benchmark: each new pair needs a verified probe, measurement, and execution path.
+Use `channels/four_pauli.py` as a worked example. Implement `build_a`, `build_b`, `strategies`, and `analytic_bounds`; register the pair in `channels/api.py` and document its claims in `claims.json`. Verify formulas, circuits, labels, and payloads. Gallery registration alone does not create a live benchmark: a new live pair also needs validated preparation, measurement, result parsing, and bridge/UI integration. The extension chapter walks through these steps.
 
 ## Acknowledgment and license
 
