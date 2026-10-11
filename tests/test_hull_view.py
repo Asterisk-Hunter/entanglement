@@ -547,7 +547,7 @@ def test_heatmap_declares_no_motion_and_no_thread_geometry(heatmap_markup: str) 
 
 
 def test_heatmap_uses_a_fixed_viewbox(heatmap_markup: str) -> None:
-    assert 'viewBox="0 0 460 420"' in heatmap_markup
+    assert 'viewBox="0 0 680 490"' in heatmap_markup
     assert "preserveAspectRatio" in heatmap_markup
     assert re.search(r'stroke-width="1"', heatmap_markup)
 
@@ -702,7 +702,7 @@ def test_sweep_markup_prints_kind_tags_on_every_value(sweep_markup: str) -> None
     assert 'data-kind="ANALYTIC"' in sweep_markup
     assert 'data-kind="THEORETICAL_CEILING"' in sweep_markup
     assert ">ANALYTIC<" in sweep_markup
-    assert ">THEORETICAL CEILING<" in sweep_markup
+    assert "THEORETICAL CEILING" in sweep_markup
 
 
 def test_sweep_marks_the_1024_column_precomputed(sweep_markup: str) -> None:
@@ -712,8 +712,8 @@ def test_sweep_marks_the_1024_column_precomputed(sweep_markup: str) -> None:
 
 
 def test_sweep_annotates_the_unresolvable_dimension(sweep_markup: str) -> None:
-    assert ">BELOW CHANCE RESOLUTION<" in sweep_markup
-    assert sweep_markup.count(">BELOW CHANCE RESOLUTION<") == 2
+    assert "BELOW CHANCE RESOLUTION" in sweep_markup
+    assert 'data-role="resolution-marker"' in sweep_markup
 
 
 def test_sweep_draws_the_chance_line(sweep_markup: str) -> None:
@@ -727,8 +727,23 @@ def test_sweep_declares_no_motion_and_no_thread_geometry(sweep_markup: str) -> N
 
 
 def test_sweep_uses_a_fixed_viewbox(sweep_markup: str) -> None:
-    assert 'viewBox="0 0 760 420"' in sweep_markup
+    assert 'viewBox="0 0 760 480"' in sweep_markup
     assert re.search(r'stroke-width="1"', sweep_markup)
+
+
+def test_figure_coordinates_are_finite(hull_markup: str, heatmap_markup: str, sweep_markup: str) -> None:
+    """Missing point fields and missing chance values must never reach SVG."""
+    for markup in (hull_markup, heatmap_markup, sweep_markup):
+        coordinates = re.findall(r'\b(?:x|y|x1|y1|x2|y2|cx|cy)="([^"]+)"', markup)
+        assert coordinates
+        assert all(math.isfinite(float(value)) for value in coordinates)
+
+
+def test_sweep_marks_fit_inside_plot(sweep_model: dict) -> None:
+    layout = sweep_model["layout"]
+    for row in sweep_model["rows"]:
+        assert layout["axisLeft"] <= row["x"] - 22
+        assert row["x"] + 22 <= layout["axisRight"]
 
 
 def test_sweep_text_equivalent_states_the_statistics_facts() -> None:

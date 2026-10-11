@@ -28,6 +28,8 @@ For the HURTS pair at `d = 256`, the maximally entangled outputs have signed ove
 
 The Entanglement Trap page runs as a Qollab project. The source page is a Qollab-injected HTML fragment; `main.js` and `main.css` are loaded by the Qollab runtime. Its Python bridge uses Qiskit circuits and one backend job for the flagship run. The resource gallery is metadata-only and submits no jobs.
 
+For a local UI preview, run `python -m http.server 8000` and open `http://localhost:8000/preview.html`. The preview shows the analytic figures and disables live runs; the experiment needs Qollab's injected backend.
+
 ## Three outcomes, one question
 
 For each channel pair, how well can we distinguish the channels with a separable probe and with a maximally entangled probe?
@@ -71,7 +73,7 @@ python -m pip install -r requirements-dev.txt
 python -m pytest -q
 ```
 
-The complete suite checks the analytic fixtures, channel circuits, gallery schema, extension contract, and Qollab bridge behavior using local test backends. `requirements-dev.txt` pins every Python dependency. One test for the actual Qollab browser runtime is intentionally skipped because that external runtime is not available in a local test run.
+The complete suite checks the analytic fixtures, channel circuits, gallery schema, extension contract, and Qollab bridge behavior using local test backends. `requirements-dev.txt` pins every Python dependency. (`requirements.txt` is the smaller hosted-environment set; it cannot run the suite.) One test for the actual Qollab browser runtime is intentionally skipped because that external runtime is not available in a local test run.
 
 To inspect the deterministic reference values without running a backend:
 

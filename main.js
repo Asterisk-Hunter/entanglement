@@ -24,9 +24,11 @@ const nodes = {
   narrative: document.getElementById("round-narrative"),
   readout: document.getElementById("benchmark-readout"),
   impact: document.getElementById("impact"),
+  impactContext: document.getElementById("impact-context"),
   provenance: document.getElementById("provenance"),
   state: document.getElementById("run-state"),
   error: document.getElementById("bridge-error"),
+  proofFallback: document.getElementById("proof-fallback"),
   announcer: document.getElementById("announcer"),
   run: document.getElementById("run"),
   strategy: document.getElementById("strategy"),
@@ -38,6 +40,12 @@ const nodes = {
   mechanismOverlap: document.getElementById("mechanism-overlap"),
   mechanismTrace: document.getElementById("mechanism-trace"),
   mechanismSuccess: document.getElementById("mechanism-success"),
+  batchComparison: document.getElementById("batch-comparison"),
+  comparisonScope: document.getElementById("comparison-scope"),
+  comparisonSepRate: document.getElementById("comparison-sep-rate"),
+  comparisonMeRate: document.getElementById("comparison-me-rate"),
+  comparisonSepCi: document.getElementById("comparison-sep-ci"),
+  comparisonMeCi: document.getElementById("comparison-me-ci"),
   galleryList: document.getElementById("gallery-list"),
   galleryState: document.getElementById("gallery-state"),
   expertToggle: document.getElementById("expert-toggle"),
@@ -45,8 +53,13 @@ const nodes = {
 };
 
 let experience = null;
+let runStarted = false;
 let benchmarkRevealed = false;
 let selectedPair = null;
+let finishLiveRun;
+const liveRunFinished = new Promise(function (resolve) {
+  finishLiveRun = resolve;
+});
 
 /* Qollab injects the selected device as a bare `backend` global. Every read of
  * it goes through this probe, so a missing injection reports itself honestly
@@ -56,7 +69,7 @@ function backendProbe() {
   const bare = typeof backend;
   const scoped = typeof globalThis.backend;
   return {
-    present: bare !== "undefined" && bare !== "null",
+    present: bare !== "undefined" && backend !== null,
     text:
       "backend typeof=" + bare +
       " · globalThis.backend typeof=" + scoped,
@@ -102,22 +115,34 @@ function selectedDimension() {
   return parseInt(nodes.dimension.value, 10);
 }
 
+function validExperience(result) {
+  if (!result || result.kind !== "ExperienceResult" || result.total_backend_jobs !== 1 ||
+      !result.round || !Array.isArray(result.round.outcome) || !result.benchmarks) return false;
+  return [PROBE_KINDS.SEPARABLE, PROBE_KINDS.MAX_ENTANGLEMENT].every(function (probe) {
+    const value = result.benchmarks[probe];
+    return value && value.probe_kind === probe && value.dimension === result.dimension &&
+      Number.isInteger(value.trials) && value.trials > 0 &&
+      [value.empirical_rate, value.analytic_value, value.ceiling, value.ci_low, value.ci_high]
+        .every(function (number) { return Number.isFinite(number) && number >= 0 && number <= 1; }) &&
+      value.ci_low <= value.ci_high;
+  });
+}
+
 function reportBridgeFailure(error) {
   const detail = error && error.message ? " " + error.message : "";
   // Qollab's IonQ backends allow ONE backend job per project Run. A failed run
   // may already have consumed it, so this Run cannot retry. The copy says so and
   // shows no number, because no verified result exists.
   nodes.error.textContent =
-    "RUN FAILED BEFORE A COMPLETE EVIDENCE PAYLOAD WAS PRODUCED." +
+    "This run did not produce verified evidence." +
     detail +
-    " NO FALLBACK NUMBER IS PRESENTED AS LIVE DATA. This Qollab Run allows ONE BACKEND JOB," +
-    " so a new run is needed to try again; if the heavy setting was the cause, start a NEW QOLLAB RUN" +
-    " with a smaller dimension.";
+    " Qollab allows ONE BACKEND JOB per run. Start a NEW QOLLAB RUN to try again; choose a smaller dimension if needed.";
   nodes.state.textContent = "RUN FAILED · NO VERIFIED RESULT · THIS RUN'S JOB IS SPENT";
   nodes.run.textContent = "RUN CLOSED · START A NEW QOLLAB RUN";
   nodes.run.disabled = true;
   nodes.trials.disabled = true;
   nodes.dimension.disabled = true;
+  nodes.proofFallback.hidden = false;
 }
 
 function selectedBenchmark() {
@@ -169,6 +194,17 @@ function renderSelectedBenchmark() {
   nodes.compareSeparable.disabled = selectedProbe() === PROBE_KINDS.SEPARABLE;
 }
 
+function renderBatchComparison() {
+  const sep = experience.benchmarks.SEPARABLE;
+  const entangled = experience.benchmarks.MAX_ENTANGLEMENT;
+  nodes.comparisonScope.textContent = "EMPIRICAL · d=" + experience.dimension + " · " + sep.trials + " TRIALS / PROBE";
+  nodes.comparisonSepRate.textContent = percent(sep.empirical_rate, 1);
+  nodes.comparisonMeRate.textContent = percent(entangled.empirical_rate, 1);
+  nodes.comparisonSepCi.textContent = "95% CI " + percent(sep.ci_low, 1) + "–" + percent(sep.ci_high, 1);
+  nodes.comparisonMeCi.textContent = "95% CI " + percent(entangled.ci_low, 1) + "–" + percent(entangled.ci_high, 1);
+  nodes.batchComparison.hidden = false;
+}
+
 const expertController = expert.mountExpert(
   {
     toggle: nodes.expertToggle,
@@ -186,7 +222,7 @@ function selectGalleryPair(pair, openInspector) {
 
 function loadGallery() {
   nodes.galleryState.textContent = "LOADING REGISTRY · ZERO BACKEND JOBS";
-  callBridge("get_gallery", {})
+  return callBridge("get_gallery", {})
     .then(function (result) {
       if (!result || result.kind !== "GalleryResult" || result.total_backend_jobs !== 0) {
         throw new Error("bridge returned an invalid gallery payload");
@@ -215,6 +251,8 @@ document.getElementById("round-form").addEventListener("submit", function (event
     nodes.state.textContent = "EVIDENCE CACHED · NO SECOND BACKEND JOB SENT";
     return;
   }
+  if (runStarted) return;
+  runStarted = true;
 
   const shots = selectedShots();
   const dimension = selectedDimension();
@@ -229,7 +267,7 @@ document.getElementById("round-form").addEventListener("submit", function (event
     " · bridge=" +
     typeof bridge +
     " · callPromisingKwargs=" +
-    typeof bridge.get_experience.callPromisingKwargs
+    typeof bridge.get_experience?.callPromisingKwargs
   );
 
   nodes.state.textContent =
@@ -248,10 +286,9 @@ document.getElementById("round-form").addEventListener("submit", function (event
     probe_kind: selectedProbe(),
     shots: shots,
     d: dimension,
-    rng_seed: null,
   })
     .then(function (result) {
-      if (!result || result.kind !== "ExperienceResult" || result.total_backend_jobs !== 1) {
+      if (!validExperience(result) || result.dimension !== dimension) {
         throw new Error("bridge returned an invalid experience payload");
       }
       experience = result;
@@ -260,6 +297,11 @@ document.getElementById("round-form").addEventListener("submit", function (event
       nodes.state.textContent = "JOB COMPLETE · EVIDENCE CACHED · NO SECOND JOB NEEDED";
       nodes.strategy.disabled = false;
       nodes.run.textContent = "ROUND COMPLETE";
+      renderBatchComparison();
+      benchmarkRevealed = true;
+      renderSelectedBenchmark();
+      nodes.strategy.textContent = "VIEW STRATEGY DETAILS";
+      nodes.announcer.textContent = roundAnnouncement(result.round) + " " + benchmarkAnnouncement(selectedBenchmark());
       nodes.provenance.textContent =
         "SOURCE " + result.source_label +
         " | backend=" + result.backend +
@@ -268,7 +310,16 @@ document.getElementById("round-form").addEventListener("submit", function (event
         " | smoke: " + probe.text;
       if (selectedPair) expert.update(selectedPair, experience);
     })
-    .catch(reportBridgeFailure);
+    .catch(reportBridgeFailure)
+    .finally(function () { finishLiveRun(); });
+});
+
+// Qollab's iframe omits allow-forms. Dispatch our application event directly;
+// a native submit button/requestSubmit is blocked before the submit handler.
+nodes.run.addEventListener("click", function () {
+  document.getElementById("round-form").dispatchEvent(
+    new Event("submit", { bubbles: true, cancelable: true }),
+  );
 });
 
 nodes.strategy.addEventListener("click", function () {
@@ -278,6 +329,9 @@ nodes.strategy.addEventListener("click", function () {
   }
   benchmarkRevealed = true;
   renderSelectedBenchmark();
+  nodes.readout.closest("details").open = true;
+  nodes.readout.focus({ preventScroll: true });
+  nodes.readout.scrollIntoView({ block: "nearest" });
 });
 
 nodes.compareSeparable.addEventListener("click", function () {
@@ -322,4 +376,13 @@ mountHeatmap(
   document.getElementById("heatmap-values"),
 );
 
-loadGallery();
+// Qollab closes its execution window when this entry script resolves. Keep it
+// open while the user chooses a probe and until the one bridge job settles.
+// Await metadata first so two Pyodide calls cannot overlap during startup.
+await loadGallery();
+if (backendProbe().present) {
+  nodes.run.disabled = false;
+  nodes.run.textContent = "PLAY ONE ROUND";
+  nodes.state.textContent = "READY · NO QUANTUM JOB SENT";
+  await liveRunFinished;
+}

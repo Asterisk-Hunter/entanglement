@@ -15,7 +15,7 @@ from __future__ import annotations
 import random
 from typing import Dict, List, Mapping, Sequence, Tuple
 
-from qiskit import QuantumCircuit
+from qiskit import QuantumCircuit, transpile
 
 from quantum.results import (
     PROBE_KINDS,
@@ -285,6 +285,15 @@ def run_batch(
 
     pair = _flagship_pair()
     circuits = build_flagship_batch(d, total_qubits)
+    # The built-in simulator does not decompose MCX automatically. Translate
+    # to portable abstract gates before submission, retaining the register and
+    # measurement layout. One process also works in Qollab's browser runtime.
+    circuits = transpile(
+        circuits,
+        basis_gates=["rx", "ry", "rz", "cx"],
+        optimization_level=0,
+        num_processes=1,
+    )
     job = backend.run(circuits, shots=shots)
     result = job.result()
     counts, mapping = _extract_counts(result, BATCH_NAMES)

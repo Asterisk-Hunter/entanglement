@@ -327,8 +327,8 @@ function hullEdge(hull) {
     .map(function (vertex, index) {
       const next = hull[(index + 1) % hull.length];
       return (
-        '<line data-role="hull-edge" x1="' + vertex.cx + '" y1="' + vertex.cy +
-        '" x2="' + next.cx + '" y2="' + next.cy +
+        '<line data-role="hull-edge" x1="' + vertex.x + '" y1="' + vertex.y +
+        '" x2="' + next.x + '" y2="' + next.y +
         '" class="hv-hull" stroke-width="1" aria-hidden="true"/>'
       );
     })
@@ -449,7 +449,7 @@ export function mountHullView(host, valuesHost, initialState) {
   const model = repaint();
 
   function angleFromEvent(event) {
-    const bounds = host.getBoundingClientRect();
+    const bounds = host.querySelector("svg").getBoundingClientRect();
     const scaleX = LAYOUT.width / (bounds.width || LAYOUT.width);
     const scaleY = LAYOUT.height / (bounds.height || LAYOUT.height);
     return pointToAngle(
@@ -461,8 +461,9 @@ export function mountHullView(host, valuesHost, initialState) {
 
   function beginDrag(event) {
     const target = event.target;
+    if (!target.hasAttribute("data-index")) return;
     const index = Number(target.getAttribute("data-index"));
-    if (!Number.isInteger(index)) return;
+    if (!Number.isInteger(index) || !state.eigenvalues[index]) return;
     state = { eigenvalues: state.eigenvalues, selected: index };
     event.preventDefault();
     host.setPointerCapture(event.pointerId);
@@ -477,7 +478,7 @@ export function mountHullView(host, valuesHost, initialState) {
     }
 
     function onEnd() {
-      host.releasePointerCapture(event.pointerId);
+      if (host.hasPointerCapture(event.pointerId)) host.releasePointerCapture(event.pointerId);
       host.removeEventListener("pointermove", onMove);
       host.removeEventListener("pointerup", onEnd);
       host.removeEventListener("pointercancel", onEnd);

@@ -61,13 +61,13 @@ export function bestAlignedPresent() {
 }
 
 export const LAYOUT = {
-  width: 460,
-  height: 420,
+  width: 680,
+  height: 490,
   plotLeft: 90,
-  plotRight: 430,
+  plotRight: 620,
   plotTop: 60,
   plotBottom: 340,
-  legendY: 380,
+  legendY: 416,
 };
 
 export function xForEntropy(entropy) {
@@ -156,15 +156,15 @@ function curveMarkup(points, role, className) {
 }
 
 export function renderHeatmap(model) {
-  const chanceY = yForSuccess(SUCCESS_AXIS.chance);
+  const chanceY = yForSuccess(model.chance);
   const body =
     axisTicks(ENTROPY_AXIS, false) +
     axisTicks(SUCCESS_AXIS, true) +
     '<line data-role="chance-line" x1="' + LAYOUT.plotLeft + '" y1="' + chanceY + '" x2="' +
     LAYOUT.plotRight + '" y2="' + chanceY + '" class="hv-chance" stroke-width="1"' +
     ' stroke-dasharray="2 3" aria-hidden="true"/>' +
-    '<text data-role="chance-label" x="' + (LAYOUT.plotRight + 6) + '" y="' + (chanceY + 4) +
-    '" class="hv-tick-label" aria-hidden="true">CHANCE 1/2</text>' +
+    '<text data-role="chance-label" x="' + (LAYOUT.plotRight - 8) + '" y="' + (chanceY - 12) +
+    '" class="hv-tick-label" text-anchor="end" aria-hidden="true">CHANCE 1/2</text>' +
     curveMarkup(model.fixedBasis, "fixed-basis", "hv-fixed") +
     (model.bestAlignedPresent ? curveMarkup(model.bestAligned, "best-aligned", "hv-aligned") : "");
   const missing =
@@ -179,11 +179,13 @@ export function renderHeatmap(model) {
     '" data-role="heatmap">' +
     body +
     missing +
-    '<text x="' + LAYOUT.plotLeft + '" y="' + (LAYOUT.plotBottom + 38) +
-    '" class="hv-axis-label" text-anchor="middle" aria-hidden="true">' +
-    ENTROPY_AXIS.label + "</text>" +
-    '<text x="16" y="' + ((LAYOUT.plotTop + LAYOUT.plotBottom) / 2) +
-    '" class="hv-axis-label" text-anchor="middle" aria-hidden="true">' + SUCCESS_AXIS.label + "</text>" +
+     '<text x="' + ((LAYOUT.plotLeft + LAYOUT.plotRight) / 2) + '" y="' + (LAYOUT.plotBottom + 38) +
+     '" class="hv-axis-label" text-anchor="middle" aria-hidden="true">' +
+     ENTROPY_AXIS.label + "</text>" +
+     '<text x="18" y="' + ((LAYOUT.plotTop + LAYOUT.plotBottom) / 2) +
+     '" class="hv-axis-label" text-anchor="middle" transform="rotate(-90 18 ' +
+     ((LAYOUT.plotTop + LAYOUT.plotBottom) / 2) +
+     ')" aria-hidden="true">' + SUCCESS_AXIS.label + "</text>" +
     legend(model) +
     "</svg>"
   );
@@ -198,12 +200,12 @@ function legend(model) {
     '<circle cx="' + (LAYOUT.plotLeft + 118) + '" cy="' + (y - 8) + '" r="4" class="hv-aligned" stroke-width="1"/>' +
     '<text x="' + (LAYOUT.plotLeft + 130) + '" y="' + (y - 4) + '" class="hv-note">BEST ALIGNED</text>' +
     '<text x="' + LAYOUT.plotLeft + '" y="' + (y + 16) + '" class="hv-note">' +
-    "BOTH CURVES ARE HELSTROM BOUNDS OVER ROTATED BASES. NEITHER IS A MEASUREMENT." +
+    "HELSTROM BOUNDS. NEITHER IS A MEASUREMENT." +
     "</text>" +
     '<text x="' + LAYOUT.plotLeft + '" y="' + (y + 32) + '" class="hv-note">' +
-    "OVERLAP LAMBDA_0 IS THE AXIS THESE CURVES MAXIMISE; LAMBDA_0 = 1/2 IS THE BEST BOUND.</text>" +
+    "LAMBDA_0 = 1/2 GIVES THE BEST BOUND.</text>" +
     '<text x="' + LAYOUT.plotLeft + '" y="' + (y + 48) + '" class="hv-note">' +
-    "EVERY POINT ON BOTH CURVES IS " + KIND.ceiling + ".</text>" +
+    "EVERY POINT: " + KIND.ceiling + ".</text>" +
     "</g>"
   );
 }

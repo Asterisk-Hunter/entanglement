@@ -4,6 +4,8 @@
 
 Open the published Entanglement Trap project on Qollab, choose an available backend, and start a project Run. Select a probe, dimension, and shot count, then choose **Play one round**. The project submits one four-circuit batch for the flagship Identity-vs-`V` pair. The batch supports the displayed round and both strategy benchmarks; revealing or comparing results reuses the returned evidence and does not submit another job.
 
+Wait for **READY** before choosing **Play one round**. Qollab keeps its outer Run active while you choose a probe; no quantum job is sent until you click. The outer Run completes after the batch finishes, and the cached comparison and charts remain interactive. If the QPU confirmation is covered by Qollab's cookie notice, dismiss that notice first.
+
 The Qollab runtime supplies the selected backend to the Python bridge. The project reports the backend name and uses the neutral provenance label `qollab-selected-backend`; project code does not guess whether the selected backend is local or remote. A failed run may consume the run's one-job allowance, so the interface asks you to start a new Qollab Run before retrying.
 
 The resource gallery is different: it calls a metadata-only bridge function and submits zero jobs. It lists registered channel pairs, their declared strategies, and best-effort circuit descriptions.
@@ -20,7 +22,7 @@ python -m pip install -r requirements-dev.txt
 python -m pytest -q
 ```
 
-The pinned requirements make the local test environment reproducible; this suite was verified with Python `3.12.14`. It checks science fixtures, Qiskit circuits, exact-statevector results, batch parsing, payload contracts, and the extension interface. The test `test_actual_qollab_browser_runtime_executes_the_batch` is skipped because local tests cannot provide Qollab's browser runtime or its injected backend.
+The pinned `requirements-dev.txt` makes the local test environment reproducible; this suite was verified with Python `3.12.14`. It checks science fixtures, Qiskit circuits, exact-statevector results, batch parsing, payload contracts, and the extension interface. The test `test_actual_qollab_browser_runtime_executes_the_batch` is skipped because local tests cannot provide Qollab's browser runtime or its injected backend.
 
 To print the registered pairs and their analytic bounds:
 

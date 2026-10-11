@@ -19,7 +19,8 @@ function channelName(channel) {
 
 export function roundNarrative(result) {
   if (result && result.sampled_from_shared_batch) {
-    return "This is one independent one-query trial sampled from the shared quantum batch. It shows one outcome only; it does not measure a rate.";
+    const probe = result.probe_kind === PROBE_KINDS.SEPARABLE ? "separable" : "maximally entangled";
+    return "This round used the " + probe + " probe: one independent one-query trial sampled from the shared batch. One outcome does not measure a rate.";
   }
   return "One round is one use of the hidden channel. It shows a single outcome. It does not measure a rate.";
 }
@@ -27,7 +28,7 @@ export function roundNarrative(result) {
 export function roundLines(result) {
   var halves = result.outcome || [];
   return [
-    "YOU GUESSED " + channelName(result.guess),
+    "STRATEGY GUESSED " + channelName(result.guess),
     "ACTUAL CHANNEL " + channelName(result.hidden_channel),
     "MEASURED OUTCOME [" + halves.join(" | ") + "]",
     result.won ? "WIN" : "LOSE",

@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0b0e14">
+  <title>Entanglement Trap · Local preview</title>
+  <link rel="stylesheet" href="main.css">
+  <script type="importmap">{"imports":{"quantum.bridge":"./preview-bridge-shim.js"}}</script>
+</head>
+<body>
+  <script type="module">
+    const response = await fetch("./index.html");
+    if (!response.ok) throw new Error("Could not load the experiment page");
+    document.body.insertAdjacentHTML("afterbegin", await response.text());
+    const notice = document.createElement("p");
+    notice.className = "meta-mono preview-notice";
+    notice.textContent = "LOCAL PREVIEW · Analytic figures only. Run the experiment in Qollab.";
+    document.querySelector("header").after(notice);
+    const chartsLink = document.createElement("a");
+    chartsLink.className = "result-link";
+    chartsLink.href = "#charts";
+    chartsLink.textContent = "View all interactive charts ↓";
+    notice.append(" ", chartsLink);
+    document.querySelector("#run").disabled = true;
+    document.querySelector("#run-state").textContent = "LIVE RUNS REQUIRE THE QOLLAB BACKEND";
+    await import("./main.js");
+    function showCharts() {
+      if (location.hash !== "#charts") return;
+      document.querySelectorAll(".proof-depth").forEach(section => { section.open = true; });
+      document.querySelector("#fingerprint-figure").scrollIntoView({ block: "start" });
+    }
+    addEventListener("hashchange", showCharts);
+    showCharts();
+  </script>
+</body>
+</html>

@@ -70,6 +70,7 @@ export function cardModel(pair) {
         probeKind: strategy.probe_kind,
         value: strategy.analytic_value,
         valueText: String(strategy.analytic_value),
+        displayValue: (Number(strategy.analytic_value) * 100).toFixed(1) + "%",
         kindToken: strategy.bound_kind,
         kindLabel: kindLabel(strategy.bound_kind),
       };
@@ -85,6 +86,11 @@ export function renderCard(card, index) {
       "<span class=\"gallery-value\">" + escapeHtml(row.valueText) + "</span></dd>"
     );
   }).join("");
+  const summaryRows = card.strategies.map(function (row) {
+    return "<dt>" + escapeHtml(row.label) + "</dt>" +
+      "<dd><span class=\"kind-tag\">" + escapeHtml(row.kindLabel) + "</span>" +
+      "<span class=\"gallery-value\">" + escapeHtml(row.displayValue) + "</span></dd>";
+  }).join("");
 
   return (
     "<li class=\"gallery-item\" data-effect=\"" + escapeHtml(card.effect.token) + "\">" +
@@ -92,9 +98,10 @@ export function renderCard(card, index) {
     "<div class=\"gallery-heading\"><h3 class=\"gallery-name\">" + escapeHtml(card.name) + "</h3>" +
     "<button type=\"button\" class=\"gallery-select\" data-pair-index=\"" + index + "\">INSPECT</button></div>" +
     "<p class=\"gallery-meta\">" + escapeHtml(card.role) + " · d = " + escapeHtml(card.dimension) + " · " + escapeHtml(card.effect.token) + "</p>" +
-    "<dl class=\"gallery-rows\">" + rows +
+    "<p class=\"label\">ONE-QUERY WIN PROBABILITY</p><dl class=\"gallery-rows\">" + summaryRows + "</dl>" +
+    "<details class=\"figure-details gallery-details\"><summary>Exact values and source</summary><dl class=\"gallery-rows\">" + rows +
     "<dt>READING</dt><dd>" + escapeHtml(card.effect.text) + "</dd>" +
-    "<dt>SOURCE</dt><dd>" + escapeHtml(card.citation) + "</dd></dl>" +
+    "<dt>SOURCE</dt><dd>" + escapeHtml(card.citation) + "</dd></dl></details>" +
     "</div></li>"
   );
 }

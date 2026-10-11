@@ -108,14 +108,14 @@ export const SWEEP_FIXTURE = {
 
 export const LAYOUT = {
   width: 760,
-  height: 420,
+  height: 480,
   axisLeft: 130,
   axisRight: 720,
   axisTop: 70,
   axisBottom: 320,
-  columnPitch: 108,
+  columnPitch: 96,
   columnWidth: 74,
-  legendY: 372,
+  legendY: 412,
 };
 
 export function columnX(index) {
@@ -136,6 +136,11 @@ function round(value) {
 
 function full(value) {
   return Number(value).toString();
+}
+
+/* Plot labels stay compact; the accessible ledger retains exact values. */
+function plotValue(value) {
+  return Number(value).toFixed(3).replace(/\.?0+$/, "");
 }
 
 export function sweepModel() {
@@ -175,7 +180,7 @@ function chanceLine(model) {
     '<line data-role="chance-line" x1="' + LAYOUT.axisLeft + '" y1="' + y + '" x2="' +
     LAYOUT.axisRight + '" y2="' + y + '" class="sw-chance" stroke-width="1"' +
     ' stroke-dasharray="2 3" aria-hidden="true"/>' +
-    '<text data-role="chance-label" x="' + (LAYOUT.axisRight + 6) + '" y="' + (y + 4) +
+    '<text data-role="chance-label" x="' + LAYOUT.axisLeft + '" y="' + (y - 8) +
     '" class="sw-tick-label" aria-hidden="true">' + SUCCESS_AXIS.chanceLabel + "</text>"
   );
 }
@@ -187,26 +192,28 @@ function column(model, row) {
         '" class="sw-kind" text-anchor="middle" aria-hidden="true">' + PRECOMPUTED + "</text>"
       : row.resolvableFromChance
         ? ""
-        : '<text x="' + row.x + '" y="' + (LAYOUT.axisBottom + 54) +
-          '" class="sw-kind" text-anchor="middle" aria-hidden="true">' +
-          "BELOW CHANCE RESOLUTION</text>";
+        : '<text data-role="resolution-marker" x="' + row.x + '" y="' + (LAYOUT.axisBottom + 54) +
+          '" class="sw-kind" text-anchor="middle" aria-hidden="true">&#8224;</text>';
   return (
     '<g data-role="sweep-column" data-d="' + row.d + '" data-source="' + row.source + '">' +
     '<line data-role="ceiling-mark" data-kind="' + row.ceilingToken + '" x1="' + row.x +
     '" y1="' + (row.ceilingY - 8) + '" x2="' + row.x + '" y2="' + (row.ceilingY + 8) +
     '" class="sw-ceiling" stroke-width="1" aria-hidden="true"/>' +
-    '<text data-role="ceiling-value" class="sw-value" x="' + row.x + '" y="' + (row.ceilingY - 14) +
-    '" text-anchor="middle" aria-hidden="true">' + full(row.ceiling) + "</text>" +
+    (row.ceiling === row.separable ? "" :
+      '<text data-role="ceiling-value" class="sw-value" x="' + row.x + '" y="' + (row.ceilingY - 14) +
+      '" text-anchor="middle" aria-hidden="true">' + plotValue(row.ceiling) + "</text>") +
     '<circle data-role="analytic-mark" data-kind="' + row.simpleToken + '" cx="' + row.x +
     '" cy="' + row.simpleY + '" r="4" class="sw-mark" stroke-width="1" aria-hidden="true"/>' +
-    '<text data-role="simple-value" class="sw-value" x="' + row.x + '" y="' + (row.simpleY + 18) +
-    '" text-anchor="middle" aria-hidden="true">' + full(row.simple) + "</text>" +
+    (row.simple === row.separable ? "" :
+      '<text data-role="simple-value" class="sw-value" x="' + row.x + '" y="' +
+      (row.simpleY > LAYOUT.axisBottom - 24 ? row.simpleY - 12 : row.simpleY + 18) +
+      '" text-anchor="middle" aria-hidden="true">' + plotValue(row.simple) + "</text>") +
     '<rect data-role="separable-mark" data-kind="' + row.separableToken + '" x="' +
     round(row.x - 22) + '" y="' + (row.separableY - 6) + '" width="44" height="12"' +
     ' class="sw-separable" stroke-width="1" aria-hidden="true"/>' +
     '<text data-role="separable-value" class="sw-value" x="' + row.x + '" y="' +
     (row.separableY - 12) + '" text-anchor="middle" aria-hidden="true">' +
-    full(row.separable) + "</text>" +
+    plotValue(row.separable) + "</text>" +
     '<text class="sw-column-label" x="' + row.x + '" y="' + (LAYOUT.axisBottom + 22) +
     '" text-anchor="middle" aria-hidden="true">d=' + row.d + "</text>" +
     '<text class="sw-kind" x="' + row.x + '" y="' + (LAYOUT.axisBottom + 38) +
@@ -227,14 +234,12 @@ function legend(model) {
     '<line data-role="ceiling-mark" data-kind="' + TOKEN.ceiling + '" x1="' + (130 + 360) +
     '" y1="' + (y - 16) + '" x2="' + (130 + 360) + '" y2="' + (y - 6) +
     '" class="sw-ceiling" stroke-width="1"/>' +
-    '<text x="' + (130 + 370) + '" y="' + (y - 7) + '" class="sw-note">HELSTROM CEILING</text>' +
-    '<text x="' + (130 + 370) + '" y="' + (y + 7) + '" class="sw-kind" text-anchor="middle" aria-hidden="true">THEORETICAL CEILING</text>' +
-    '<text x="130" y="' + (y + 14) + '" class="sw-note">' + KIND.analytic +
-    ": the flagship strategy's closed-form value, executable at every live dimension. " +
-    KIND.ceiling + ": the Helstrom optimum, theory only.</text>" +
-    '<text x="130" y="' + (y + 30) + '" class="sw-note">' + PRECOMPUTED +
+    '<text x="' + (130 + 370) + '" y="' + (y - 7) + '" class="sw-note">' + KIND.ceiling + '</text>' +
+    '<text x="130" y="' + (y + 18) + '" class="sw-note">' + KIND.analytic +
+    ": executable strategy. " + KIND.ceiling + ": theory only.</text>" +
+    '<text x="130" y="' + (y + 36) + '" class="sw-note">' + PRECOMPUTED +
     ": theory only, never executed; there is no 20-qubit live path.</text>" +
-    '<text x="' + (130 + 370) + '" y="' + (y + 44) + '" class="sw-kind" text-anchor="middle" aria-hidden="true">BELOW CHANCE RESOLUTION</text>' +
+    '<text x="130" y="' + (y + 54) + '" class="sw-kind" aria-hidden="true">&#8224; BELOW CHANCE RESOLUTION</text>' +
     "</g>"
   );
 }

@@ -57,6 +57,23 @@ def _require_shots(shots: int) -> int:
     return shots
 
 
+def _normalize_round_seed(rng_seed: int | None) -> int | None:
+    """Accept JavaScript null at the Pyodide boundary as an omitted seed."""
+    if rng_seed is not None and not isinstance(rng_seed, int):
+        try:
+            from pyodide.ffi import jsnull
+        except ImportError:
+            pass
+        else:
+            if rng_seed is jsnull:
+                rng_seed = None
+    if rng_seed is not None and (
+        not isinstance(rng_seed, int) or isinstance(rng_seed, bool)
+    ):
+        raise ValueError("rng_seed must be an integer or null")
+    return rng_seed
+
+
 def _require_provenance(provenance: str) -> str:
     if provenance not in PROVENANCE_VALUES:
         raise ValueError(
@@ -150,6 +167,7 @@ def get_experience(
     _require_backend(backend)
     _require_shots(shots)
 
+    rng_seed = _normalize_round_seed(rng_seed)
     batch = run_batch(
         backend,
         shots=shots,
@@ -244,6 +262,7 @@ def get_round(
     _require_shots(shots)
     if shots != 1:
         raise ValueError("a literal round must use exactly one shot")
+    rng_seed = _normalize_round_seed(rng_seed)
     round_result = play_one_round(
         backend,
         probe_kind=probe_kind,

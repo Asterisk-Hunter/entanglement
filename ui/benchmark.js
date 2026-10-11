@@ -13,7 +13,7 @@ export const STRATEGY_SLUGS = {
   MAX_ENTANGLEMENT: "hurts-max-entanglement",
 };
 
-export const IMPACT_CARD = "MORE ENTANGLEMENT MADE YOU WORSE.";
+export const IMPACT_CARD = "THIS PAIR FAVORS THE SEPARABLE PROBE.";
 
 const FALLBACK_LABELS = {
   "live-remote": "LIVE REMOTE",
@@ -55,29 +55,9 @@ export function mustRevealImpact(result) {
 }
 
 export function impactBlock(result) {
-  const comparison = result && result.comparison;
-  if (!comparison || !comparison.separable || !comparison.max_entanglement) {
-    return [
-      IMPACT_CARD,
-      "Same dimension. Same one-query task. Compare the two verified strategies above.",
-    ];
-  }
-
-  const sep = comparison.separable;
-  const max = comparison.max_entanglement;
   return [
     IMPACT_CARD,
-    "MAX ENTANGLEMENT · EMPIRICAL " +
-      formatPercent(max.empirical_rate) +
-      " · ANALYTIC " +
-      formatPercent(max.analytic_value) +
-      " · CEILING " +
-      formatPercent(max.ceiling),
-    "SEPARABLE · EMPIRICAL " +
-      formatPercent(sep.empirical_rate) +
-      " · ANALYTIC " +
-      formatPercent(sep.analytic_value),
-    "Same dimension. Same channel-discrimination task. Entanglement stayed maximal; distinguishability collapsed.",
+    "Same dimension. Same channels. The probe changes how distinguishable the outputs are.",
   ];
 }
 
@@ -100,8 +80,13 @@ export function benchmarkAnnouncement(result) {
 export function renderBenchmark(result, nodes) {
   nodes.readout.textContent = readoutLines(result).join("\n");
   const revealed = mustRevealImpact(result);
-  nodes.impact.textContent = revealed ? impactBlock(result).join("\n") : "";
+  const impact = impactBlock(result);
+  nodes.impact.textContent = revealed ? impact[0] : "";
   nodes.impact.hidden = !revealed;
+  if (nodes.impactContext) {
+    nodes.impactContext.textContent = revealed ? impact[1] : "";
+    nodes.impactContext.hidden = !revealed;
+  }
   nodes.provenance.textContent =
     "SOURCE " +
     sourceLabel(result) +
