@@ -6,22 +6,9 @@
 
 [Read the field guide](https://github.com/Asterisk-Hunter/entanglement/blob/main/docs/src/SUMMARY.md) · [Explore the source](https://github.com/Asterisk-Hunter/entanglement)
 
-## The question behind the experiment
+## What is it?
 
-In channel discrimination, a referee chooses one of two transformations with equal probability. You prepare a probe, use the unknown transformation once, then measure the output to identify it. An entangled probe includes a reference register that stays outside the channel.
-
-Entanglement Trap follows **choose → run → compare → explain → inspect**. A counterexample and two contrasting channel pairs show why success depends on the probe and measurement, as well as the amount of entanglement.
-
-## Try it
-
-1. Choose an available simulator on Qollab and start a project **Run**.
-2. Wait for **READY**, then choose **Separable** or **Max entanglement**. Start with dimension **16** and **100 shots per channel**.
-3. Click **Play one round**. The app submits four circuits in one backend call, gathering results for both strategies.
-4. Compare the empirical win rates and confidence intervals. Open **Strategy details**, explore **The proof**, and inspect the channel pairs in **Resource Lab**.
-
-The displayed round is sampled from the measured batch. A single win or loss does not establish a success rate. Comparisons reuse the same results and submit no further jobs. To run another experiment—or retry after a failure—start a new Qollab **Run**.
-
-## What is on the Qollab page
+Entanglement Trap is an interactive quantum channel-discrimination laboratory. Its learning path is **choose → run → compare → explain → inspect**.
 
 - **Experiment:** a live Identity-vs-`V` channel-discrimination run with both probe strategies, one sampled round, and empirical results.
 - **Proof:** four interactive figures showing output distinguishability, the dimension sweep, eigenvalue geometry, and the relation to entanglement entropy.
@@ -30,7 +17,17 @@ The displayed round is sampled from the measured batch. A single win or loss doe
 
 **Resource Lab is the gallery within this project.** The separate **Entangle Lab** singlet/CHSH companion in the full repository is a local browser app; it is not included in the published Qollab project.
 
-## Read the results correctly
+## Why does it matter, and who is it for?
+
+Entanglement is a resource, not a universal upgrade. This experiment helps learners and quantum developers evaluate the complete **probe–channel–measurement strategy**, rather than assume maximum entanglement gives maximum performance.
+
+It is for **students** building quantum intuition, **educators** demonstrating a counterexample, and **technical reviewers or developers** inspecting the circuits, formulas, and evidence. The game provides an accessible entry point; the figures and seven-chapter field guide support deeper study.
+
+Its practical value is educational: making resource choices and measurement assumptions visible. It does not claim a deployed engineering application or computational advantage.
+
+## How does the quantum part work?
+
+In channel discrimination, a referee chooses one of two transformations with equal probability. You prepare a probe, use the unknown transformation once, then measure the output to identify it. An entangled probe includes a reference register that stays outside the channel.
 
 Live results use the dimension and shot count selected for that run. The proof section and gallery also show analytic reference values, including the flagship result at **dimension 256**. Those reference values are separate from the live measurements.
 
@@ -74,35 +71,30 @@ At dimension 16, the implemented entangled strategy's analytic success is **61.7
 
 With 100 shots per channel, each probe's benchmark pools 200 trials across the two channels. Finite-shot rates fluctuate. The code uses Agresti–Coull confidence intervals, which remain informative even when every observed trial succeeds. A failed run produces an error message rather than invented evidence.
 
-## Scientific scope and credit
-
-The underlying channel-discrimination results are prior work. Entanglement Trap contributes the interactive experiment, shared-batch execution, visual explanations, and traceable evidence labels.
-
-- The flagship counterexample is credited to **Lien and Quintino (2026, preprint)**.
-- The one-query discrimination bound is credited to **D'Ariano, Lo Presti and Paris, J. Opt. B 4, S273 (2002)**.
-- The generalized channel-discrimination formulas are credited to **Manna, Das Bhowmik and Saha, Phys. Rev. A 112, 042215 (2025)**.
-
-Small instances are classically simulable; no computational advantage is claimed. Analytic predictions and theoretical ceilings are labeled separately from measured backend results. Backend selection comes from Qollab; a simulator run is not presented as hardware evidence. See `claims.json` and `attribution.md` in the project source for provenance and build credit.
-
-## Implementation
+### Implementation
 
 Qollab loads the HTML fragment, `main.js`, and `main.css`, and supplies the selected backend. `quantum/bridge.py` returns the shared run payload; `quantum/engine.py` compiles and executes the four-circuit batch. `quantum/science.py` provides formulas, `channels/` defines the pairs, and `ui/` renders the explanations.
 
 The live runner is specific to Identity vs. `V`. The gallery registry supports all three pairs' metadata. The architecture chapter below explains this boundary and the one-job design.
 
-## Field guide: from intuition to implementation
+### Scientific scope and credit
 
-The seven-chapter mdBook develops the explanation from first principles through reproducible implementation. These public Markdown links work outside Qollab:
+The underlying channel-discrimination results are prior work. Entanglement Trap contributes the interactive experiment, shared-batch execution, visual explanations, and traceable evidence labels.
 
-| Chapter | What it helps you do |
-| --- | --- |
-| [Introduction](https://github.com/Asterisk-Hunter/entanglement/blob/main/docs/src/index.md) | Understand the question, audience, and scientific scope. |
-| [Run the lab](https://github.com/Asterisk-Hunter/entanglement/blob/main/docs/src/run-the-lab.md) | Run the Qollab experiment and reproduce local checks. |
-| [Channel discrimination](https://github.com/Asterisk-Hunter/entanglement/blob/main/docs/src/channel-discrimination.md) | Learn the decision task, trace-norm bound, and flagship formulas. |
-| [Three channel-pair results](https://github.com/Asterisk-Hunter/entanglement/blob/main/docs/src/results.md) | Compare the pairs with their strategy and evidence qualifications. |
-| [Add a channel pair](https://github.com/Asterisk-Hunter/entanglement/blob/main/docs/src/add-a-pair.md) | Implement the shared interface and document new claims. |
-| [Architecture and evidence](https://github.com/Asterisk-Hunter/entanglement/blob/main/docs/src/architecture.md) | Trace the one-job design, module responsibilities, and validation layers. |
-| [Limits and sources](https://github.com/Asterisk-Hunter/entanglement/blob/main/docs/src/limits-and-sources.md) | Check the research references, limitations, and historical-value audit. |
+- The flagship counterexample is credited to **Lien and Quintino (2026, preprint)**.
+- The one-query discrimination bound is credited to **D'Ariano, Lo Presti and Paris, J. Opt. B 4, S273 (2002)**.
+- The unitary-channel comparison draws on **Manna, Das Bhowmik and Saha, Phys. Rev. A 112, 042215 (2025)**.
+
+Small instances are classically simulable; no computational advantage is claimed. Analytic predictions and theoretical ceilings are labeled separately from measured backend results. Backend selection comes from Qollab; a simulator run is not presented as hardware evidence. See `claims.json` and `attribution.md` in the project source for provenance and build credit.
+
+## How do I run it?
+
+1. Choose an available simulator on Qollab and start a project **Run**.
+2. Wait for **READY**, then choose **Separable** or **Max entanglement**. Start with dimension **16** and **100 shots per channel**.
+3. Click **Play one round**. The app submits four circuits in one backend call, gathering results for both strategies.
+4. Compare the empirical win rates and confidence intervals. Open **Strategy details**, explore **The proof**, and inspect the channel pairs in **Resource Lab**.
+
+The displayed round is sampled from the measured batch. A single win or loss does not establish a success rate. Comparisons reuse the same results and submit no further jobs. To run another experiment—or retry after a failure—start a new Qollab **Run**.
 
 ### Local development
 
@@ -130,6 +122,20 @@ On Windows, create the environment with `py -3.12 -m venv .venv` and activate it
 The local suite covers analytic formulas, circuits, result parsing, registry contracts, and the Python bridge. Its hosted-browser integration case is skipped locally because it requires Qollab's runtime.
 
 To read the book locally, run `mdbook serve --open` from `docs/`. Maintained sources live in `docs/src/`; generated pages go to `docs/book/`. The companion has its own guide under `entangle-lab/docs/`.
+
+### Field guide: from intuition to implementation
+
+The seven-chapter mdBook develops the explanation from first principles through reproducible implementation. These public Markdown links work outside Qollab:
+
+| Chapter | What it helps you do |
+| --- | --- |
+| [Introduction](https://github.com/Asterisk-Hunter/entanglement/blob/main/docs/src/index.md) | Understand the question, audience, and scientific scope. |
+| [Run the lab](https://github.com/Asterisk-Hunter/entanglement/blob/main/docs/src/run-the-lab.md) | Run the Qollab experiment and reproduce local checks. |
+| [Channel discrimination](https://github.com/Asterisk-Hunter/entanglement/blob/main/docs/src/channel-discrimination.md) | Learn the decision task, trace-norm bound, and flagship formulas. |
+| [Three channel-pair results](https://github.com/Asterisk-Hunter/entanglement/blob/main/docs/src/results.md) | Compare the pairs with their strategy and evidence qualifications. |
+| [Add a channel pair](https://github.com/Asterisk-Hunter/entanglement/blob/main/docs/src/add-a-pair.md) | Implement the shared interface and document new claims. |
+| [Architecture and evidence](https://github.com/Asterisk-Hunter/entanglement/blob/main/docs/src/architecture.md) | Trace the one-job design, module responsibilities, and validation layers. |
+| [Limits and sources](https://github.com/Asterisk-Hunter/entanglement/blob/main/docs/src/limits-and-sources.md) | Check the research references, limitations, and historical-value audit. |
 
 ### Extend the laboratory
 
