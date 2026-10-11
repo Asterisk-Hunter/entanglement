@@ -67,11 +67,11 @@ Use Python 3.12.14 and the pinned development dependencies. From the repository 
 python3.12 -m venv .venv
 . .venv/bin/activate
 python -m pip install --upgrade pip
-python -m pip install -r requirements-dev.txt
+python -m pip install -r requirements.txt
 python -m pytest -q
 ```
 
-The complete suite checks the analytic fixtures, channel circuits, gallery schema, extension contract, and Qollab bridge behavior using local test backends. `requirements-dev.txt` pins every Python dependency. One test for the actual Qollab browser runtime is intentionally skipped because that external runtime is not available in a local test run.
+The complete suite checks the analytic fixtures, channel circuits, gallery schema, extension contract, and Qollab bridge behavior using local test backends. `requirements.txt` pins every Python dependency. One test for the actual Qollab browser runtime is intentionally skipped because that external runtime is not available in a local test run.
 
 To inspect the deterministic reference values without running a backend:
 

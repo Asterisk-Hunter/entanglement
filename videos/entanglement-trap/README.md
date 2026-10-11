@@ -26,7 +26,7 @@ The scripts pin HyperFrames `0.8.145`. `npm run render` writes `renders/video.mp
 
 ## Refresh the expert drawer crop
 
-From the repository root, use Python 3.12 with `requirements-dev.txt` installed, plus Playwright and Chromium. Then run:
+From the repository root, use Python 3.12 with `requirements.txt` installed, plus Playwright and Chromium. Then run:
 
 ```sh
 python3.12 videos/entanglement-trap/capture/export-expert-fixture.py
